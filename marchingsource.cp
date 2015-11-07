@@ -17,7 +17,9 @@
 #include "math.h"
 //This program requires the OpenGL and GLUT libraries
 // You can obtain them for free from http://www.opengl.org
-#include "GL/glut.h"
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
 
 struct GLvector
 {
@@ -113,7 +115,7 @@ GLvoid vMarchCube1(GLfloat fX, GLfloat fY, GLfloat fZ, GLfloat fScale);
 GLvoid vMarchCube2(GLfloat fX, GLfloat fY, GLfloat fZ, GLfloat fScale);
 GLvoid (*vMarchCube)(GLfloat fX, GLfloat fY, GLfloat fZ, GLfloat fScale) = vMarchCube1;
 
-void main(int argc, char **argv) 
+int main(int argc, char **argv)
 { 
         GLfloat afPropertiesAmbient [] = {0.50, 0.50, 0.50, 1.00}; 
         GLfloat afPropertiesDiffuse [] = {0.75, 0.75, 0.75, 1.00}; 

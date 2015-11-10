@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Viewer.h"
 #include "TriMesh.h"
-
+#include "deformation.h"
 
 bool parseCmdLine(int argc, char** argv, 
                   char* & meshFile, 

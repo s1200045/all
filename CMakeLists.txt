@@ -1,26 +1,31 @@
-# Created by the script cgal_create_CMakeLists
-# This is the CMake script for compiling a set of CGAL applications.
+project(pick)
 
-project( executable )
+cmake_minimum_required(VERSION 2.6)
+cmake_policy(VERSION 2.6)
+
+set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 
-cmake_minimum_required(VERSION 2.6.2)
-if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_GREATER 2.6)
-  if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" VERSION_GREATER 2.8.3)
-    cmake_policy(VERSION 2.8.4)
-  else()
-    cmake_policy(VERSION 2.6)
-  endif()
-endif()
+# Options (to edit if necessary)
+option(USE_DEBUG "Debug mode?"   OFF)
+option(USE_64BIT_ARCH "64 arch?" OFF)
 
-set( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true )
- 
-if ( COMMAND cmake_policy )
+if(USE_DEBUG)
+    set(CMAKE_BUILD_TYPE Debug)
+else(USE_DEBUG)
+    set(CMAKE_BUILD_TYPE Release)
+endif(USE_DEBUG)
 
-  cmake_policy( SET CMP0003 NEW )  
+if(USE_64BIT_ARCH)
+    set(LINK_FLAGS -m64)
+    add_definitions(-m64)
+endif(USE_64BIT_ARCH)
 
-endif()
 
+find_package(GLUT)
+find_package(OpenGL)
 # CGAL and its components
 find_package( CGAL QUIET COMPONENTS  )
 
@@ -45,19 +50,20 @@ if ( NOT Boost_FOUND )
   return()  
 
 endif()
-
-# include for local directory
-
-# include for local package
+set(LIB_SRC TriMesh.cpp types.cpp Camera.cpp Image.cpp Shader.cpp Viewer.cpp CIsoSurface.cpp Vectors.cpp)
+set(SRCS ${LIB_SRC} main.cpp)
 
 
-# Creating entries for target: executable
-# ############################
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-long-long -DGL_GLEXT_PROTOTYPES")
 
-add_executable( executable  Camera.cpp Image.cpp Shader.cpp TriMesh.cpp Viewer.cpp main.cpp types.cpp )
+include_directories(${GLUT_INCLUDE_DIR})
+include_directories(${OPENGL_INCLUDE_DIR})
+include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_to_cached_list( CGAL_EXECUTABLE_TARGETS executable )
 
-# Link the executable to CGAL and third-party libraries
-target_link_libraries(executable   ${CGAL_LIBRARIES} ${CGAL_3RD_PARTY_LIBRARIES} )
+if(APPLE)
+    set(CMAKE_SHARED_LIBRARY_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_CXX_FLAGS} -framework Accelerate")
+endif(APPLE)
 
+add_executable(${PROJECT_NAME} ${SRCS})
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})

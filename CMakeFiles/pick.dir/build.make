@@ -201,9 +201,57 @@ CMakeFiles/pick.dir/Viewer.cpp.o.provides: CMakeFiles/pick.dir/Viewer.cpp.o.requ
 CMakeFiles/pick.dir/Viewer.cpp.o.provides.build: CMakeFiles/pick.dir/Viewer.cpp.o
 
 
+CMakeFiles/pick.dir/CIsoSurface.cpp.o: CMakeFiles/pick.dir/flags.make
+CMakeFiles/pick.dir/CIsoSurface.cpp.o: CIsoSurface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pick.dir/CIsoSurface.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pick.dir/CIsoSurface.cpp.o -c /Users/s1200045/all/CIsoSurface.cpp
+
+CMakeFiles/pick.dir/CIsoSurface.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pick.dir/CIsoSurface.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/s1200045/all/CIsoSurface.cpp > CMakeFiles/pick.dir/CIsoSurface.cpp.i
+
+CMakeFiles/pick.dir/CIsoSurface.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pick.dir/CIsoSurface.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/s1200045/all/CIsoSurface.cpp -o CMakeFiles/pick.dir/CIsoSurface.cpp.s
+
+CMakeFiles/pick.dir/CIsoSurface.cpp.o.requires:
+
+.PHONY : CMakeFiles/pick.dir/CIsoSurface.cpp.o.requires
+
+CMakeFiles/pick.dir/CIsoSurface.cpp.o.provides: CMakeFiles/pick.dir/CIsoSurface.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pick.dir/build.make CMakeFiles/pick.dir/CIsoSurface.cpp.o.provides.build
+.PHONY : CMakeFiles/pick.dir/CIsoSurface.cpp.o.provides
+
+CMakeFiles/pick.dir/CIsoSurface.cpp.o.provides.build: CMakeFiles/pick.dir/CIsoSurface.cpp.o
+
+
+CMakeFiles/pick.dir/Vectors.cpp.o: CMakeFiles/pick.dir/flags.make
+CMakeFiles/pick.dir/Vectors.cpp.o: Vectors.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pick.dir/Vectors.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pick.dir/Vectors.cpp.o -c /Users/s1200045/all/Vectors.cpp
+
+CMakeFiles/pick.dir/Vectors.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pick.dir/Vectors.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/s1200045/all/Vectors.cpp > CMakeFiles/pick.dir/Vectors.cpp.i
+
+CMakeFiles/pick.dir/Vectors.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pick.dir/Vectors.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/s1200045/all/Vectors.cpp -o CMakeFiles/pick.dir/Vectors.cpp.s
+
+CMakeFiles/pick.dir/Vectors.cpp.o.requires:
+
+.PHONY : CMakeFiles/pick.dir/Vectors.cpp.o.requires
+
+CMakeFiles/pick.dir/Vectors.cpp.o.provides: CMakeFiles/pick.dir/Vectors.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pick.dir/build.make CMakeFiles/pick.dir/Vectors.cpp.o.provides.build
+.PHONY : CMakeFiles/pick.dir/Vectors.cpp.o.provides
+
+CMakeFiles/pick.dir/Vectors.cpp.o.provides.build: CMakeFiles/pick.dir/Vectors.cpp.o
+
+
 CMakeFiles/pick.dir/main.cpp.o: CMakeFiles/pick.dir/flags.make
 CMakeFiles/pick.dir/main.cpp.o: main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pick.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pick.dir/main.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pick.dir/main.cpp.o -c /Users/s1200045/all/main.cpp
 
 CMakeFiles/pick.dir/main.cpp.i: cmake_force
@@ -233,6 +281,8 @@ pick_OBJECTS = \
 "CMakeFiles/pick.dir/Image.cpp.o" \
 "CMakeFiles/pick.dir/Shader.cpp.o" \
 "CMakeFiles/pick.dir/Viewer.cpp.o" \
+"CMakeFiles/pick.dir/CIsoSurface.cpp.o" \
+"CMakeFiles/pick.dir/Vectors.cpp.o" \
 "CMakeFiles/pick.dir/main.cpp.o"
 
 # External object files for target pick
@@ -244,10 +294,17 @@ pick: CMakeFiles/pick.dir/Camera.cpp.o
 pick: CMakeFiles/pick.dir/Image.cpp.o
 pick: CMakeFiles/pick.dir/Shader.cpp.o
 pick: CMakeFiles/pick.dir/Viewer.cpp.o
+pick: CMakeFiles/pick.dir/CIsoSurface.cpp.o
+pick: CMakeFiles/pick.dir/Vectors.cpp.o
 pick: CMakeFiles/pick.dir/main.cpp.o
 pick: CMakeFiles/pick.dir/build.make
+pick: /opt/local/lib/libmpfr.dylib
+pick: /opt/local/lib/libgmp.dylib
+pick: /opt/local/lib/libCGAL.dylib
+pick: /opt/local/lib/libboost_thread-mt.dylib
+pick: /opt/local/lib/libboost_system-mt.dylib
 pick: CMakeFiles/pick.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable pick"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/s1200045/all/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable pick"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pick.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -261,6 +318,8 @@ CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/Camera.cpp.o.requires
 CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/Image.cpp.o.requires
 CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/Shader.cpp.o.requires
 CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/Viewer.cpp.o.requires
+CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/CIsoSurface.cpp.o.requires
+CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/Vectors.cpp.o.requires
 CMakeFiles/pick.dir/requires: CMakeFiles/pick.dir/main.cpp.o.requires
 
 .PHONY : CMakeFiles/pick.dir/requires

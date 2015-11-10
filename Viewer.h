@@ -59,8 +59,9 @@ public:
    // Application
    static void clearData();
    static void pickCenter();
-    
-　　static void selectedVertDeformation(double selelected_x,double selected_y,double selected_z);
+    //added
+   static void selectedVertDeformation(double selelected_x,double selected_y,double selected_z);
+   // void createGrid(const Vector3& leftCorner,const Vector3& rightCorner,unsigned int nx, unsigned int ny, unsigned int nz,std::vector<Vector3>& grid)
 };
 
 #endif // VIEWER_H

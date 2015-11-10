@@ -2,13 +2,19 @@
 #include <CGAL/pca_estimate_normals.h>
 #include <CGAL/mst_orient_normals.h>
 #include <CGAL/property_map.h>
+#include <eigen/Eigen/Core>
+#include "hrbf_core.h"
+#include "hrbf_phi_funcs.h"
+#include "CIsoSurface.h"
+#include "Vectors.h"
+#include <utility>
+
 
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <cassert>
 #include <limits>
-#include <utility>
 #include "Viewer.h"
 #include "Image.h"
 #include "TriMesh.h"
@@ -37,7 +43,13 @@ GLuint Viewer::surfaceDL = 0;
 Shader Viewer::shader;
 Camera Viewer::camera;
 
-void 
+//added
+typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef Kernel::Point_3 Point;
+typedef Kernel::Vector_3 Vector;
+typedef Eigen::Matrix<double,3,1> Vector3;
+bool flag=0;
+void
 Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
 {
     switch(c)
@@ -486,24 +498,103 @@ void Viewer::takeScreenshot()
 
     index++;
 }
+//added
+void createGrid(const Vector3& leftCorner,
+                const Vector3& rightCorner,
+                unsigned int nx, unsigned int ny, unsigned int nz,
+                std::vector<Vector3>& grid)
+{
+    double dx = (rightCorner[0] - leftCorner[0]) / nx;
+    double dy = (rightCorner[1] - leftCorner[1]) / ny;
+    double dz = (rightCorner[2] - leftCorner[2]) / nz;
+    
+    double currentX = leftCorner[0];
+    double currentY = leftCorner[1];
+    double currentZ = leftCorner[2];
+    
+    for (unsigned int zsub = 0; zsub < nz; ++zsub) {
+        currentY = leftCorner[1];
+        for (unsigned int ysub = 0; ysub < ny; ++ysub) {
+            currentX = leftCorner[0];
+            for (unsigned int xsub = 0; xsub < nx; ++xsub) {
+                grid.push_back(Vector3(currentX, currentY, currentZ));
+                currentX = currentX + dx;
+            }
+            currentY = currentY + dy;
+        }
+        currentZ = currentZ + dz;
+    }
+}
 
 void Viewer::selectedVertDeformation(double selected_x,double selected_y,double selected_z)
  {
-   std::vector<Vec3> vertNormal, deformationPoints;
-   std::vector<std::pair<Vec3,Vec3> > vertex;
+     typedef std::pair<Point, Vector> PointVectorPair;
+     std::vector<Vec3> vertNormal, deformationPoints;
+     std::vector<PointVectorPair> points;
+   //std::vector<vec3Pair> vertex;
    meshPtr->computeVertNormals(vertNormal);
    double distance,thr=1,d=1.0/13.0,alpha=1.0,disp;
    for(unsigned i=0;i<meshPtr->numVerts();i++){
-     Vec3 p = meshPtr->getVertPos(i);
-     distance=sqrt(pow((selected_x-p.x),2)+pow((selected_y-p.y),2)+pow((selected_z-p.z),2));
+     Vec3 p_neighbor = meshPtr->getVertPos(i);
+     distance=sqrt(pow((selected_x-p_neighbor.x),2)+pow((selected_y-p_neighbor.y),2)+pow((selected_z-p_neighbor.z),2));
      if(distance>thr)disp=0;
       else disp=d*exp(-alpha*pow(distance,2));
-     Vec3 tmp(p.x+disp*vertNormal[i].x,p.y+disp*vertNormal[i].y,p.z+disp*vertNormal[i].z);
+     //Vec3 tmp(p.x+disp*vertNormal[i].x,p.y+disp*vertNormal[i].y,p.z+disp*vertNormal[i].z);
      //deformationPoints.push_back(tmp);
-     vertex.push_back(std::make_pair(tmp,vertNormal[i]));
+       Point p(p_neighbor.x+disp*vertNormal[i].x,p_neighbor.y+disp*vertNormal[i].y,p_neighbor.z+disp*vertNormal[i].z);
+       Vector v(vertNormal[i].x,vertNormal[i].y,vertNormal[i].z);
+                //vertex.push_back(std::make_pair(tmp,vertNormal[i]));
+       points.push_back(std::make_pair(p,v));
    }
  
 
  const int nb_neighbors = 18; // K-nearest neighbors = 3 rings
- CGAL::pca_estimate_normals(vertex.begin(), vertex.end(), CGAL::First_of_pair_property_map<vertex>(),CGAL::Second_of_pair_property_map<vertex>(),nb_neighbors);
+ CGAL::pca_estimate_normals(points.begin(), points.end(), CGAL::First_of_pair_property_map<PointVectorPair>(),CGAL::Second_of_pair_property_map<PointVectorPair>(),nb_neighbors);
+ 
+std::vector<PointVectorPair> ::iterator unoriented_points_begin =
+CGAL::mst_orient_normals(points.begin(), points.end(),
+                         CGAL::First_of_pair_property_map<PointVectorPair>(),
+                         CGAL::Second_of_pair_property_map<PointVectorPair>(),
+                         nb_neighbors);
+points.erase(unoriented_points_begin, points.end());
+     
+     std::vector<Vector3> points2;
+     std::vector<Vector3> normals2;
+     
+     for(unsigned i=0;i<meshPtr->numVerts();i++){
+ 
+
+
+     Vector3 p_tmp(points[i].first.x(), points[i].first.y(), points[i].first.z());
+         Vector3 n_tmp(points[i].second.x(), points[i].second.y(), points[i].second.z());
+         
+         points2.push_back(p_tmp);
+         normals2.push_back(n_tmp);
+         
+     }
+     std::vector<Vector3> structuredGrid;
+     Vector3 leftCorner(-1.5,-1.5,-1.5);
+     Vector3 rightCorner(1.5,1.5,1.5);
+     unsigned int subx = 20;
+     unsigned int suby = 20;
+     unsigned int subz = 20;
+     createGrid(leftCorner, rightCorner, subx, suby, subz, structuredGrid);
+     HRBF_fit<double, 3, Rbf_pow3<double> > hrbf;
+     hrbf.hermite_fit(points2, normals2);
+     
+     
+     // Evaluate on the grid
+     std::vector<double> results(structuredGrid.size());
+     for (size_t i = 0; i < structuredGrid.size(); ++i) {
+         results[i] = hrbf.eval(structuredGrid[i]);
+         std::cout<<results[i]<<std::endl;
+     }
+     float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
+     float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
+     float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
+     CIsoSurface <short> *ciso = new CIsoSurface <short> ();
+
+     
  }
+
+

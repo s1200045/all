@@ -35,7 +35,7 @@ public:
 	
 	// Generates the isosurface from the scalar field contained in the
 	// buffer ptScalarField[].
-	void GenerateSurface(const T* ptScalarField, T tIsoLevel, unsigned int nCellsX, unsigned int nCellsY,  unsigned int nCellsZ, float fCellLengthX, float fCellLengthY, float fCellLengthZ);
+    void GenerateSurface(const double* ptScalarField, T tIsoLevel, unsigned int nCellsX, unsigned int nCellsY,  unsigned int nCellsZ, float fCellLengthX, float fCellLengthY, float fCellLengthZ);
 
 	// Returns true if a valid surface has been generated.
 	bool IsSurfaceValid();
@@ -102,7 +102,7 @@ protected:
 	float m_fCellLengthX, m_fCellLengthY, m_fCellLengthZ;
 
 	// The buffer holding the scalar field.
-	const T* m_ptScalarField;
+    const double *m_ptScalarField;
 
 	// The isosurface value.
 	T m_tIsoLevel;

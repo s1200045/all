@@ -592,9 +592,13 @@ points.erase(unoriented_points_begin, points.end());
      float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
-     CIsoSurface <short> *ciso = new CIsoSurface <short> ();
-
-     
+     CIsoSurface <double> *ciso = new CIsoSurface <double> ();
+    /* int n;
+     double * volume;
+     n=results.size();
+     volume = (double *)malloc( sizeof( double ) * n );
+     //ciso->GenerateSurface(&results[0], 0, 20, 20, 20, dx, dy, dz);
+     */
  }
 
 

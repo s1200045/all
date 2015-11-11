@@ -329,7 +329,7 @@ template <class T> CIsoSurface<T>::~CIsoSurface()
 	DeleteSurface();
 }
 
-template <class T> void CIsoSurface<T>::GenerateSurface(const T* ptScalarField, T tIsoLevel, unsigned int nCellsX, unsigned int nCellsY, unsigned int nCellsZ, float fCellLengthX, float fCellLengthY, float fCellLengthZ)
+template <class T> void CIsoSurface<T>::GenerateSurface(const double* ptScalarField, T tIsoLevel, unsigned int nCellsX, unsigned int nCellsY, unsigned int nCellsZ, float fCellLengthX, float fCellLengthY, float fCellLengthZ)
 {
 	if (m_bValidSurface)
 		DeleteSurface();

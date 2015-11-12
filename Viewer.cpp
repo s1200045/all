@@ -49,6 +49,7 @@ typedef Kernel::Point_3 Point;
 typedef Kernel::Vector_3 Vector;
 typedef Eigen::Matrix<double,3,1> Vector3;
 bool flag=0;
+CIsoSurface <double> *ciso = new CIsoSurface <double> ();
 void
 Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
 {
@@ -69,6 +70,7 @@ Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
             clearData();
             updateDisplayList();
             break;
+            
         case '/':
             takeScreenshot();
             break;
@@ -156,6 +158,7 @@ Viewer::idle()
 void 
 Viewer::display()
 {
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     shader.enable();
 
@@ -221,7 +224,8 @@ Viewer::display()
     */
     //
     
-    glutSwapBuffers();
+        glutSwapBuffers();
+    
 }
    
 void 
@@ -278,6 +282,7 @@ Viewer::drawScene()
     glPushAttrib(GL_ALL_ATTRIB_BITS);
     glEnable(GL_POLYGON_OFFSET_FILL);
     glPolygonOffset(1., 1.);
+    
     drawPolygons();
     glDisable(GL_POLYGON_OFFSET_FILL);
     if (renderWireframe) drawWireframe();
@@ -289,7 +294,8 @@ Viewer::drawScene()
 void 
 Viewer::drawPolygons()
 {
-    glEnable(GL_LIGHTING);
+        if(flag==0){
+            glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 
     std::vector<Vec3> vertNormal;
@@ -319,12 +325,29 @@ Viewer::drawPolygons()
             glVertex3d(p.x, p.y, p.z);
         }
     }
-    glEnd();
-
+            glEnd();
     glDisable(GL_COLOR_MATERIAL);
 }
-   
-void 
+        else if(flag==1){
+            glEnable(GL_LIGHTING);
+            glEnable(GL_COLOR_MATERIAL);
+              //glBegin(GL_TRIANGLES);
+            
+            for (unsigned i = 0; i < ciso->m_nVertices; ++i)
+            {
+                    glNormal3f(ciso->m_pvec3dNormals[i][0],ciso->m_pvec3dNormals[i][1], ciso->m_pvec3dNormals[i][2]);
+                double alpha = 0.5;
+                glColor3d(alpha, alpha, alpha);
+                glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]);
+                    std::cout<<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0]<<" "<< ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1]<<" " <<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]<<std::endl;
+            }
+            glEnd();
+            
+            glDisable(GL_COLOR_MATERIAL);
+                 std::cout<<"drawed"<<std::endl;
+        }
+}
+void
 Viewer::drawWireframe()
 {
     shader.disable();   
@@ -592,13 +615,11 @@ points.erase(unoriented_points_begin, points.end());
      float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
-     CIsoSurface <double> *ciso = new CIsoSurface <double> ();
-    /* int n;
-     double * volume;
-     n=results.size();
-     volume = (double *)malloc( sizeof( double ) * n );
-     //ciso->GenerateSurface(&results[0], 0, 20, 20, 20, dx, dy, dz);
-     */
+
+
+     ciso->GenerateSurface(&results[0], 0, 20, 20, 20, dx, dy, dz);
+     flag=1;
+     std::cout<<"flag=1"<<std::endl;
  }
 
 

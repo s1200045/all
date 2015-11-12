@@ -743,3 +743,4 @@ template <class T> void CIsoSurface<T>::CalculateNormals()
 template class CIsoSurface<short>;
 template class CIsoSurface<unsigned short>;
 template class CIsoSurface<float>;
+template class CIsoSurface<double>;

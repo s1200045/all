@@ -684,9 +684,7 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      std::cout<<"flag=1"<<std::endl;
      
      createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
-     //updateDisplayList();
-     //callDisplayList();
-     glutPostRedisplay();
+     drawPolygons();
  }
 
 

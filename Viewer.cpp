@@ -8,6 +8,7 @@
 #include "CIsoSurface.h"
 #include "Vectors.h"
 #include <utility>
+#include <fstream>
 
 
 #include <cstdlib>
@@ -331,13 +332,13 @@ Viewer::drawPolygons()
         else if(flag==1){
             glEnable(GL_LIGHTING);
             glEnable(GL_COLOR_MATERIAL);
-              //glBegin(GL_TRIANGLES);
+              glBegin(GL_TRIANGLES);
             
             for (unsigned i = 0; i < ciso->m_nVertices; ++i)
             {
                     glNormal3f(ciso->m_pvec3dNormals[i][0],ciso->m_pvec3dNormals[i][1], ciso->m_pvec3dNormals[i][2]);
-                double alpha = 0.5;
-                glColor3d(alpha, alpha, alpha);
+                float alpha = 0.5;
+                glColor3f(alpha, alpha, alpha);
                 glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]);
                     std::cout<<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0]<<" "<< ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1]<<" " <<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]<<std::endl;
             }
@@ -549,6 +550,65 @@ void createGrid(const Vector3& leftCorner,
     }
 }
 
+void createVTKFile(const std::string& outFileName,
+                   unsigned int nx, unsigned int ny, unsigned int nz,
+                   const std::vector<Vector3>& grid,
+                   const std::vector<double>& data)
+{
+    std::ofstream out(outFileName.c_str());
+    
+    // header
+    out << "# vtk DataFile Version 3.0" << std::endl;
+    out << "vtk output" << std::endl;
+    out << "ASCII" << std::endl;
+    out << "DATASET STRUCTURED_GRID" << std::endl;
+    out << "DIMENSIONS " <<
+    nx << " " <<
+    ny << " " <<
+    nz << std::endl;
+    out << "POINTS " << nx*ny*nz << " double" << std::endl;
+    
+    // structured grid
+    std::vector<Vector3>::const_iterator it;
+    for (it = grid.begin(); it != grid.end(); ++it) {
+        Vector3 curr = *it;
+        out << curr[0] << " " << curr[1] << " " << curr[2] << std::endl;
+    }
+    out << std::endl;
+    
+    // data
+    // header
+    out << std::endl;
+    out << "POINT_DATA " << nx*ny*nz << std::endl;
+    out << "SCALARS Density double" << std::endl;
+    out << "LOOKUP_TABLE default" << std::endl;
+    
+    // data
+    std::vector<double>::const_iterator datait;
+    for (datait = data.begin(); datait != data.end(); ++datait) {
+        out << *datait << std::endl;
+    }
+    
+    out << std::endl;
+    
+    out.close();
+}
+
+void createOFFFile(const std::string& outFileName,std::vector<Vector3>& p, std::vector<Vector3>& n)
+{
+    std::vector<Vector3>::const_iterator it;
+    std::vector<Vector3>::const_iterator it2;
+        std::ofstream out(outFileName.c_str());
+    it2=n.begin();
+    for (it = p.begin(); it != p.end(); ++it) {
+        Vector3 curr = *it;
+        Vector3 curr2= *it2;
+        out << curr[0] << " " << curr[1] << " " << curr[2] <<" "<<curr2[0]<<" "<<curr2[1]<<" "<<curr2[2]<< std::endl;
+        it2++;
+    }
+
+    out.close();
+}
 void Viewer::selectedVertDeformation(double selected_x,double selected_y,double selected_z)
  {
      typedef std::pair<Point, Vector> PointVectorPair;
@@ -556,7 +616,7 @@ void Viewer::selectedVertDeformation(double selected_x,double selected_y,double 
      std::vector<PointVectorPair> points;
    //std::vector<vec3Pair> vertex;
    meshPtr->computeVertNormals(vertNormal);
-   double distance,thr=1,d=1.0/13.0,alpha=1.0,disp;
+   double distance,thr=0.3,d=1.0/5.0,alpha=1.0,disp;
    for(unsigned i=0;i<meshPtr->numVerts();i++){
      Vec3 p_neighbor = meshPtr->getVertPos(i);
      distance=sqrt(pow((selected_x-p_neighbor.x),2)+pow((selected_y-p_neighbor.y),2)+pow((selected_z-p_neighbor.z),2));
@@ -579,7 +639,7 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
                          CGAL::First_of_pair_property_map<PointVectorPair>(),
                          CGAL::Second_of_pair_property_map<PointVectorPair>(),
                          nb_neighbors);
-points.erase(unoriented_points_begin, points.end());
+
      
      std::vector<Vector3> points2;
      std::vector<Vector3> normals2;
@@ -595,6 +655,8 @@ points.erase(unoriented_points_begin, points.end());
          normals2.push_back(n_tmp);
          
      }
+     points.erase(unoriented_points_begin, points.end());
+     createOFFFile("test.xyz",points2,normals2);
      std::vector<Vector3> structuredGrid;
      Vector3 leftCorner(-1.5,-1.5,-1.5);
      Vector3 rightCorner(1.5,1.5,1.5);
@@ -620,6 +682,11 @@ points.erase(unoriented_points_begin, points.end());
      ciso->GenerateSurface(&results[0], 0, 20, 20, 20, dx, dy, dz);
      flag=1;
      std::cout<<"flag=1"<<std::endl;
+     
+     createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
+     //updateDisplayList();
+     //callDisplayList();
+     glutPostRedisplay();
  }
 
 

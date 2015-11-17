@@ -59,6 +59,9 @@ public:
     VECTOR3D* m_pvec3dNormals;
     	// The number of vertices which make up the isosurface.
     	unsigned int m_nVertices;
+    // List of TRIANGLES which form the triangulation of the isosurface.
+    TRIANGLEVECTOR m_trivecTriangles;
+
 protected:
 
 
@@ -76,9 +79,7 @@ protected:
 	// List of POINT3Ds which form the isosurface.
 	ID2POINT3DID m_i2pt3idVertices;
 
-	// List of TRIANGLES which form the triangulation of the isosurface.
-	TRIANGLEVECTOR m_trivecTriangles;
-
+	
 	// Returns the edge ID.
 	unsigned int GetEdgeID(unsigned int nX, unsigned int nY, unsigned int nZ, unsigned int nEdgeNo);
 

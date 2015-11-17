@@ -202,7 +202,7 @@ Viewer::display()
 
     shader.disable();
     
-
+    
     //
     /*
     Quaternion    eye(0., 0., 0.,-2.5*camera.zoom());
@@ -281,14 +281,20 @@ void
 Viewer::drawScene()
 {
     glPushAttrib(GL_ALL_ATTRIB_BITS);
-    glEnable(GL_POLYGON_OFFSET_FILL);
-    glPolygonOffset(1., 1.);
+    //glEnable(GL_POLYGON_OFFSET_FILL);
+    //glPolygonOffset(1., 1.);
     
-    drawPolygons();
+   // drawPolygons();
+
     glDisable(GL_POLYGON_OFFSET_FILL);
     if (renderWireframe) drawWireframe();
     if (renderSelected ) drawSelectedVerts();
     //drawSelectedVerts();
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    glPolygonOffset(1., 1.);
+    
+    drawPolygons();
+
     glPopAttrib();
 }
 
@@ -329,18 +335,22 @@ Viewer::drawPolygons()
             glEnd();
     glDisable(GL_COLOR_MATERIAL);
 }
-        else if(flag==1){
+       else if(flag==1){
             glEnable(GL_LIGHTING);
             glEnable(GL_COLOR_MATERIAL);
               glBegin(GL_TRIANGLES);
             
-            for (unsigned i = 0; i < ciso->m_nVertices; ++i)
+            for (unsigned i = 0; i < ciso->m_nTriangles; ++i)
             {
-                    glNormal3f(ciso->m_pvec3dNormals[i][0],ciso->m_pvec3dNormals[i][1], ciso->m_pvec3dNormals[i][2]);
+                    glNormal3f(ciso->m_pvec3dNormals[ciso->m_piTriangleIndices[i]][0],ciso->m_pvec3dNormals[ciso->m_piTriangleIndices[i]][1], ciso->m_pvec3dNormals[ciso->m_piTriangleIndices[i]][2]);
                 float alpha = 0.5;
                 glColor3f(alpha, alpha, alpha);
-                glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]);
-                    std::cout<<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][0]<<" "<< ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1]<<" " <<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]<<std::endl;
+                glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3]][2]);
+                glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+1]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+1]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+1]][2]);
+                glVertex3f(ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+2]][0], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+2]][1], ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i*3+2]][2]);
+                
+                
+                    std::cout<<ciso->m_piTriangleIndices[i]<<" "<< ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][1]<<" " <<ciso->m_ppt3dVertices[ciso->m_piTriangleIndices[i]][2]<<std::endl;
             }
             glEnd();
             
@@ -609,6 +619,19 @@ void createOFFFile(const std::string& outFileName,std::vector<Vector3>& p, std::
 
     out.close();
 }
+
+void createOFFFile2(const std::string& outFileName){
+    std::ofstream out(outFileName.c_str());
+    out<<"OFF"<<std::endl;
+    out<<ciso->m_nVertices<<" "<<ciso->m_nTriangles<<" "<<0<<std::endl;
+    for(int i=0;i<ciso->m_nVertices;i++){
+        out<<ciso->m_ppt3dVertices[i][0]<<" "<<ciso->m_ppt3dVertices[i][1]<<" "<<ciso->m_ppt3dVertices[i][2]<<std::endl;
+    }
+    for(int i=0;i<ciso->m_nTriangles;i++){
+        out<<"3"<<" "<<ciso->m_piTriangleIndices[i*3]<<" "<<ciso->m_piTriangleIndices[i*3+1]<<" "<<ciso->m_piTriangleIndices[i*3+2]<<std::endl;
+    }
+    
+}
 void Viewer::selectedVertDeformation(double selected_x,double selected_y,double selected_z)
  {
      typedef std::pair<Point, Vector> PointVectorPair;
@@ -678,13 +701,22 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
 
-
-     ciso->GenerateSurface(&results[0], 0, 20, 20, 20, dx, dy, dz);
+     double *resultarray= new double[results.size()];
+     for(int i=0;i<results.size();i++){
+         resultarray[i]=results[i];
+     }
+     ciso->GenerateSurface(resultarray, 0, 19, 19, 19, dx, dy, dz);
      flag=1;
      std::cout<<"flag=1"<<std::endl;
+     delete[] resultarray;
+     //createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
+
+   //createOFFFile2("test2.off");
+     //drawPolygons();
      
-     createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
-     drawPolygons();
+     glDisable(GL_COLOR_MATERIAL);
+     std::cout<<"drawed"<<std::endl;
+
  }
 
 

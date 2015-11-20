@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include <vector>
+#include "Vectors.h"
 
 class TriMesh
 {
@@ -38,8 +39,9 @@ public:
     double computeMaxEdgeLength() const;
     void computeVertNormals(std::vector<Vec3>& vertNormal) const;
     double computeEdgeLength(unsigned vert0, unsigned vert1) const;
-
-private:
+    void setData(POINT3D *m_ppt3dVertices ,int m_nVertices,unsigned int *m_piTriangleIndices,int m_nTriangles);
+   private:
+    
     std::vector<Vec3> mPoints;
     std::vector< std::vector<unsigned> > mFaceToVert;
 };

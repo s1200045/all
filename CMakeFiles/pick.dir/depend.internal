@@ -25,6 +25,7 @@ CMakeFiles/pick.dir/TriMesh.cpp.o
  /Users/s1200045/all/TriMesh.cpp
  /Users/s1200045/all/TriMesh.h
  /Users/s1200045/all/Triangle.h
+ /Users/s1200045/all/Vectors.h
  /Users/s1200045/all/types.h
 CMakeFiles/pick.dir/Vectors.cpp.o
  /Users/s1200045/all/Vectors.cpp
@@ -2122,6 +2123,7 @@ CMakeFiles/pick.dir/main.cpp.o
  /Users/s1200045/all/Quaternion.h
  /Users/s1200045/all/Shader.h
  /Users/s1200045/all/TriMesh.h
+ /Users/s1200045/all/Vectors.h
  /Users/s1200045/all/Viewer.h
  /Users/s1200045/all/deformation.h
  /Users/s1200045/all/main.cpp

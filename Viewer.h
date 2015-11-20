@@ -20,6 +20,7 @@ public:
    // Data
    static std::set<unsigned> selectedVert;
    static TriMesh*        meshPtr;
+    static TriMesh* marching;
    static int    verbose;
     //static TriMesh points;
    

@@ -24,6 +24,7 @@ CMakeFiles/pick.dir/Shader.cpp.o: /opt/local/include/GL/glext.h
 CMakeFiles/pick.dir/TriMesh.cpp.o: TriMesh.cpp
 CMakeFiles/pick.dir/TriMesh.cpp.o: TriMesh.h
 CMakeFiles/pick.dir/TriMesh.cpp.o: Triangle.h
+CMakeFiles/pick.dir/TriMesh.cpp.o: Vectors.h
 CMakeFiles/pick.dir/TriMesh.cpp.o: types.h
 
 CMakeFiles/pick.dir/Vectors.cpp.o: Vectors.cpp
@@ -2121,6 +2122,7 @@ CMakeFiles/pick.dir/main.cpp.o: Camera.h
 CMakeFiles/pick.dir/main.cpp.o: Quaternion.h
 CMakeFiles/pick.dir/main.cpp.o: Shader.h
 CMakeFiles/pick.dir/main.cpp.o: TriMesh.h
+CMakeFiles/pick.dir/main.cpp.o: Vectors.h
 CMakeFiles/pick.dir/main.cpp.o: Viewer.h
 CMakeFiles/pick.dir/main.cpp.o: deformation.h
 CMakeFiles/pick.dir/main.cpp.o: main.cpp

@@ -51,6 +51,9 @@ typedef Kernel::Vector_3 Vector;
 typedef Eigen::Matrix<double,3,1> Vector3;
 bool flag=0;
 CIsoSurface <double> *ciso = new CIsoSurface <double> ();
+TriMesh* Viewer::marching=0;
+
+
 void
 Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
 {
@@ -336,6 +339,7 @@ Viewer::drawPolygons()
     glDisable(GL_COLOR_MATERIAL);
 }
        else if(flag==1){
+           /*
             glEnable(GL_LIGHTING);
             glEnable(GL_COLOR_MATERIAL);
               glBegin(GL_TRIANGLES);
@@ -356,7 +360,41 @@ Viewer::drawPolygons()
             
             glDisable(GL_COLOR_MATERIAL);
                  std::cout<<"drawed"<<std::endl;
-        }
+        }*/
+           glEnable(GL_LIGHTING);
+           glEnable(GL_COLOR_MATERIAL);
+           
+           std::vector<Vec3> vertNormal;
+           marching->computeVertNormals(vertNormal);
+       
+           glBegin(GL_TRIANGLES);
+           for (unsigned face = 0; face < marching->numFaces(); ++face)
+           {
+               if (renderWireframe)
+               {
+                   Vec3 n = marching->computeFaceNormal(face);
+                   glNormal3d(n.x, n.y, n.z);
+               }
+               
+               std::vector<unsigned> fVerts;
+               marching->getFaceVerts(face, fVerts);
+               assert(fVerts.size() == 3);
+               
+               for (unsigned i = 0; i < 3; ++i)
+               {
+                   unsigned vert = fVerts[i];
+                   Vec3 p = marching->getVertPos(vert);
+                   if (!renderWireframe) glNormal3d(vertNormal[vert].x,vertNormal[vert].y, vertNormal[vert].z);
+                   
+                   double alpha = 0.5;
+                   glColor3d(alpha, alpha, alpha);
+                   glVertex3d(p.x, p.y, p.z);
+               }
+           }
+           glEnd();
+           glDisable(GL_COLOR_MATERIAL);
+       }
+
 }
 void
 Viewer::drawWireframe()
@@ -713,7 +751,11 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
 
    //createOFFFile2("test2.off");
      //drawPolygons();
+ //std::cout<<ciso->m_nVertices<<std::endl;
+     //std::cout<<(double)ciso->m_ppt3dVertices[0][0]<<std::endl;
+     marching->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
      
+     marching->normalize();
      glDisable(GL_COLOR_MATERIAL);
      std::cout<<"drawed"<<std::endl;
 

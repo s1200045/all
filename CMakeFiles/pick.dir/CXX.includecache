@@ -481,6 +481,8 @@ utility
 -
 fstream
 -
+CGAL/compute_average_spacing.h
+-
 cstdlib
 -
 iostream
@@ -522,36 +524,6 @@ TriMesh.h
 set
 -
 
-/Users/s1200045/all/deformation.h
-CGAL/Exact_predicates_inexact_constructions_kernel.h
--
-CGAL/pca_estimate_normals.h
--
-CGAL/mst_orient_normals.h
--
-CGAL/property_map.h
--
-cstdlib
--
-iostream
--
-sstream
--
-cassert
--
-limits
--
-set
--
-Viewer.h
-/Users/s1200045/all/Viewer.h
-TriMesh.h
-/Users/s1200045/all/TriMesh.h
-utility
--
-types.h
-/Users/s1200045/all/types.h
-
 /Users/s1200045/all/hrbf_core.h
 /Users/s1200045/Desktop/code/eigen/Eigen/LU
 -
@@ -573,8 +545,6 @@ Viewer.h
 /Users/s1200045/all/Viewer.h
 TriMesh.h
 /Users/s1200045/all/TriMesh.h
-deformation.h
-/Users/s1200045/all/deformation.h
 
 /Users/s1200045/all/types.cpp
 cmath
@@ -3555,6 +3525,22 @@ iterator
 -
 
 /opt/local/include/CGAL/compiler_config.h
+
+/opt/local/include/CGAL/compute_average_spacing.h
+CGAL/Search_traits_3.h
+-
+CGAL/squared_distance_3.h
+-
+CGAL/Orthogonal_k_neighbor_search.h
+-
+CGAL/property_map.h
+-
+CGAL/point_set_processing_assertions.h
+-
+iterator
+-
+list
+-
 
 /opt/local/include/CGAL/config.h
 windows.h

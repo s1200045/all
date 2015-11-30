@@ -176,21 +176,18 @@ void TriMesh::normalize()
 void TriMesh::setData(POINT3D *m_ppt3dVertices ,int m_nVertices,unsigned int *m_piTriangleIndices,int m_nTriangles){
     double x,y,z;
     for(int i=0;i<m_nVertices;i++){
-        //std::cout<<(double)m_ppt3dVertices[i][0]<<std::endl;
         x=(double)m_ppt3dVertices[i][0];
-        //std::cout<<(double)m_ppt3dVertices[i][0]<<std::endl;
         y=(double)m_ppt3dVertices[i][1];
-         std::cout<<mPoints.size()<<std::endl;
         z=(double)m_ppt3dVertices[i][2];
        mPoints.push_back(Vec3(x,y,z));
-        std::cout<<i<<std::endl;
     }
-     std::vector<unsigned> face;
+   
     for(int i=0;i<m_nTriangles;i++){
-         std::cout<<"aaaaaaaa"<<std::endl;
+          std::vector<unsigned> face;
         face.push_back(m_piTriangleIndices[i*3]);
     face.push_back(m_piTriangleIndices[i*3+1]);
         face.push_back(m_piTriangleIndices[i*3+2]);
         mFaceToVert.push_back(face);
+       // std::cout<<mFaceToVert[i][0]<<std::endl;
     }
 }

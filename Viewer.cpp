@@ -9,7 +9,7 @@
 #include "Vectors.h"
 #include <utility>
 #include <fstream>
-
+#include <CGAL/compute_average_spacing.h>
 
 #include <cstdlib>
 #include <iostream>
@@ -37,7 +37,7 @@ bool Viewer::renderWireframe = false;
 bool Viewer::renderSelected = false;
 
 std::set<unsigned> Viewer::selectedVert;
-TriMesh*        Viewer::meshPtr = 0;
+TriMesh* Viewer::meshPtr = 0;
 int    Viewer::verbose = 0;
 
 GLuint Viewer::surfaceDL = 0;
@@ -51,7 +51,7 @@ typedef Kernel::Vector_3 Vector;
 typedef Eigen::Matrix<double,3,1> Vector3;
 bool flag=0;
 CIsoSurface <double> *ciso = new CIsoSurface <double> ();
-TriMesh* Viewer::marching=0;
+TriMesh Viewer::marching;
 
 
 void
@@ -68,6 +68,7 @@ Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
             break;
         case 's':
             renderSelected = !renderSelected;
+            std::cout<<renderSelected<<std::endl;
             updateDisplayList();
             break;
         case 'r':
@@ -304,7 +305,7 @@ Viewer::drawScene()
 void 
 Viewer::drawPolygons()
 {
-        if(flag==0){
+       // if(flag==0){
             glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 
@@ -337,8 +338,8 @@ Viewer::drawPolygons()
     }
             glEnd();
     glDisable(GL_COLOR_MATERIAL);
-}
-       else if(flag==1){
+//}
+       //else if(flag==1){
            /*
             glEnable(GL_LIGHTING);
             glEnable(GL_COLOR_MATERIAL);
@@ -361,29 +362,32 @@ Viewer::drawPolygons()
             glDisable(GL_COLOR_MATERIAL);
                  std::cout<<"drawed"<<std::endl;
         }*/
-           glEnable(GL_LIGHTING);
+       /*    glEnable(GL_LIGHTING);
            glEnable(GL_COLOR_MATERIAL);
            
            std::vector<Vec3> vertNormal;
-           marching->computeVertNormals(vertNormal);
+           marching.computeVertNormals(vertNormal);
        
            glBegin(GL_TRIANGLES);
-           for (unsigned face = 0; face < marching->numFaces(); ++face)
+           for (unsigned face = 0; face < marching.numFaces(); ++face)
            {
+               
                if (renderWireframe)
                {
-                   Vec3 n = marching->computeFaceNormal(face);
+                   Vec3 n = marching.computeFaceNormal(face);
                    glNormal3d(n.x, n.y, n.z);
                }
                
                std::vector<unsigned> fVerts;
-               marching->getFaceVerts(face, fVerts);
+               marching.getFaceVerts(face, fVerts);
                assert(fVerts.size() == 3);
                
                for (unsigned i = 0; i < 3; ++i)
                {
                    unsigned vert = fVerts[i];
-                   Vec3 p = marching->getVertPos(vert);
+                   Vec3 p = marching.getVertPos(vert);
+                   std::cout<<vert<<std::endl;
+                   
                    if (!renderWireframe) glNormal3d(vertNormal[vert].x,vertNormal[vert].y, vertNormal[vert].z);
                    
                    double alpha = 0.5;
@@ -393,7 +397,7 @@ Viewer::drawPolygons()
            }
            glEnd();
            glDisable(GL_COLOR_MATERIAL);
-       }
+       }*/
 
 }
 void
@@ -518,10 +522,12 @@ Viewer::pickVertex(int x, int y)
     if (index < 0) return;
 
     std::set<unsigned>::iterator it = selectedVert.find(index);
-    if (it == selectedVert.end())
+    /*if (it == selectedVert.end())
         selectedVert.insert(index);
     else
-        selectedVert.erase(it);
+        selectedVert.erase(it);*/
+    selectedVert.clear();
+    selectedVert.insert(index);
     updateDisplayList();
 }
 
@@ -670,6 +676,44 @@ void createOFFFile2(const std::string& outFileName){
     }
     
 }
+void Wendland_gradphi(Vector3 p,std::vector<Vector3>& centers,double rho,std::vector<double>& g){
+    for(int i=0;i<centers.size();i++){
+        double r=sqrt(pow((p(0)-centers[i](0)),2)+pow((p(1)-centers[i](1)),2)+pow((p(2)-centers[i](2)),2));
+        if (r <= rho&&(p(0)!=centers[i](0)||p(1)!=centers[i](1)||p(2)!=centers[i](2))!=0){
+            g[i*3]=-20.0/pow(rho,2)*(p(0)-centers[i](0))*pow((1.0-r/rho),3);
+            g[i*3+1]=-20.0/pow(rho,2)*(p(1)-centers[i](1))*pow((1.0-r/rho),3);
+            g[i*3+2]=-20.0/pow(rho,2)*(p(2)-centers[i](2))*pow((1.0-r/rho),3);
+        }
+    }
+}
+void evalHRBF_closed(std::vector<Vector3>& pts,std::vector<Vector3>& normals, std::vector<Vector3> &centers,double rho,double eta,std::vector<double>& d){
+    
+    for(int k=0;k<pts.size();k++){
+        d[k]=0;
+    }
+        std::vector<double> g(centers.size()*3);
+    for(int j=0;j<pts.size();j++){
+        Vector3 x = pts[j];
+    
+        Wendland_gradphi(x, centers, rho,g);
+        for(int i=0;i<centers.size();i++){
+            double rho2=pow(rho,2);
+            Vector3 nr;
+
+            nr(0)=rho2/(20.0+eta*rho2)*normals[i](0);
+            nr(1)=rho2/(20.0+eta*rho2)*normals[i](1);
+            nr(2)=rho2/(20.0+eta*rho2)*normals[i](2);
+                       //     std::cout<<g[i]<<std::endl;
+            double dt=nr(0)*g[i*3]+nr(1)*g[i*3+1]+nr(2)*g[i*3+2];
+    
+            d[j]=d[j]-dt;
+          
+        }
+        g.clear();
+    }
+}
+
+
 void Viewer::selectedVertDeformation(double selected_x,double selected_y,double selected_z)
  {
      typedef std::pair<Point, Vector> PointVectorPair;
@@ -677,7 +721,7 @@ void Viewer::selectedVertDeformation(double selected_x,double selected_y,double 
      std::vector<PointVectorPair> points;
    //std::vector<vec3Pair> vertex;
    meshPtr->computeVertNormals(vertNormal);
-   double distance,thr=0.3,d=1.0/5.0,alpha=1.0,disp;
+   double distance,thr=0.1,d=1.0/5.0,alpha=200.0,disp;
    for(unsigned i=0;i<meshPtr->numVerts();i++){
      Vec3 p_neighbor = meshPtr->getVertPos(i);
      distance=sqrt(pow((selected_x-p_neighbor.x),2)+pow((selected_y-p_neighbor.y),2)+pow((selected_z-p_neighbor.z),2));
@@ -721,9 +765,9 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      std::vector<Vector3> structuredGrid;
      Vector3 leftCorner(-1.5,-1.5,-1.5);
      Vector3 rightCorner(1.5,1.5,1.5);
-     unsigned int subx = 20;
-     unsigned int suby = 20;
-     unsigned int subz = 20;
+     unsigned int subx = 64;
+     unsigned int suby = 64;
+     unsigned int subz = 64;
      createGrid(leftCorner, rightCorner, subx, suby, subz, structuredGrid);
      HRBF_fit<double, 3, Rbf_pow3<double> > hrbf;
      hrbf.hermite_fit(points2, normals2);
@@ -731,10 +775,15 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      
      // Evaluate on the grid
      std::vector<double> results(structuredGrid.size());
-     for (size_t i = 0; i < structuredGrid.size(); ++i) {
+   /*  for (size_t i = 0; i < structuredGrid.size(); ++i) {
          results[i] = hrbf.eval(structuredGrid[i]);
-         std::cout<<results[i]<<std::endl;
-     }
+         //std::cout<<results[i]<<std::endl;
+     }*/
+     double eta=4000;
+     const unsigned int nb_neighbors2 = 6; // 1 ring
+     double averagespacing = CGAL::compute_average_spacing(points.begin(), points.end(),CGAL::First_of_pair_property_map<PointVectorPair>(),nb_neighbors2);
+    
+     evalHRBF_closed(structuredGrid,normals2,points2,averagespacing,eta,results);
      float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
@@ -743,7 +792,7 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      for(int i=0;i<results.size();i++){
          resultarray[i]=results[i];
      }
-     ciso->GenerateSurface(resultarray, 0, 19, 19, 19, dx, dy, dz);
+     ciso->GenerateSurface(resultarray, 0, subx-1, suby-1, subz-1, dx, dy, dz);
      flag=1;
      std::cout<<"flag=1"<<std::endl;
      delete[] resultarray;
@@ -753,9 +802,11 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      //drawPolygons();
  //std::cout<<ciso->m_nVertices<<std::endl;
      //std::cout<<(double)ciso->m_ppt3dVertices[0][0]<<std::endl;
-     marching->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
+     delete(meshPtr);
+     meshPtr=new TriMesh;
+     meshPtr->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
      
-     marching->normalize();
+     meshPtr->normalize();
      glDisable(GL_COLOR_MATERIAL);
      std::cout<<"drawed"<<std::endl;
 

@@ -3,7 +3,6 @@
 #include <iostream>
 #include "Viewer.h"
 #include "TriMesh.h"
-#include "deformation.h"
 
 bool parseCmdLine(int argc, char** argv, 
                   char* & meshFile, 
@@ -46,12 +45,12 @@ int main(int argc, char** argv)
     double scale    = 1.0;
     if (!parseCmdLine(argc, argv, meshFile, scale, verbose)) return 0;
 
-    TriMesh mesh;
-    mesh.read(meshFile);
-    mesh.normalize();
+    TriMesh* mesh=new TriMesh;
+    mesh->read(meshFile);
+    mesh->normalize();
         
     Viewer viewer;
-    viewer.meshPtr = &mesh;
+    viewer.meshPtr = mesh;
     viewer.verbose = verbose;
     viewer.clearData();
     viewer.init(argc,argv);

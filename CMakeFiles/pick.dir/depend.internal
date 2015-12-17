@@ -123,19 +123,33 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Circle_3.h
  /opt/local/include/CGAL/Coercion_traits.h
  /opt/local/include/CGAL/Compact_container.h
+ /opt/local/include/CGAL/Complex_2_in_triangulation_3.h
+ /opt/local/include/CGAL/Complex_2_in_triangulation_cell_base_3.h
+ /opt/local/include/CGAL/Complex_2_in_triangulation_vertex_base_3.h
+ /opt/local/include/CGAL/Complexity_tags.h
+ /opt/local/include/CGAL/Concurrent_compact_container.h
  /opt/local/include/CGAL/ConicCPA2.h
  /opt/local/include/CGAL/ConicHPA2.h
  /opt/local/include/CGAL/Conic_2.h
  /opt/local/include/CGAL/Conic_misc.h
  /opt/local/include/CGAL/Default.h
+ /opt/local/include/CGAL/Delaunay_triangulation_3.h
+ /opt/local/include/CGAL/Delaunay_triangulation_cell_base_with_circumcenter_3.h
  /opt/local/include/CGAL/Dimension.h
  /opt/local/include/CGAL/Direction_2.h
  /opt/local/include/CGAL/Direction_3.h
+ /opt/local/include/CGAL/Double_map.h
+ /opt/local/include/CGAL/Eigen_matrix.h
+ /opt/local/include/CGAL/Eigen_solver_traits.h
+ /opt/local/include/CGAL/Eigen_vector.h
  /opt/local/include/CGAL/Enum_converter.h
  /opt/local/include/CGAL/Euclidean_distance.h
+ /opt/local/include/CGAL/Exact_predicates_exact_constructions_kernel.h
  /opt/local/include/CGAL/Exact_predicates_inexact_constructions_kernel.h
  /opt/local/include/CGAL/FPU.h
  /opt/local/include/CGAL/Filtered_kernel.h
+ /opt/local/include/CGAL/Filtered_kernel/Cartesian_coordinate_iterator_2.h
+ /opt/local/include/CGAL/Filtered_kernel/Cartesian_coordinate_iterator_3.h
  /opt/local/include/CGAL/Filtered_kernel_fwd.h
  /opt/local/include/CGAL/Filtered_predicate.h
  /opt/local/include/CGAL/Fraction_traits.h
@@ -154,10 +168,33 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Gmpq.h
  /opt/local/include/CGAL/Gmpz.h
  /opt/local/include/CGAL/Gmpzf.h
+ /opt/local/include/CGAL/HalfedgeDS_const_decorator.h
+ /opt/local/include/CGAL/HalfedgeDS_decorator.h
+ /opt/local/include/CGAL/HalfedgeDS_default.h
+ /opt/local/include/CGAL/HalfedgeDS_face_base.h
+ /opt/local/include/CGAL/HalfedgeDS_halfedge_base.h
+ /opt/local/include/CGAL/HalfedgeDS_items_2.h
+ /opt/local/include/CGAL/HalfedgeDS_items_decorator.h
+ /opt/local/include/CGAL/HalfedgeDS_iterator.h
+ /opt/local/include/CGAL/HalfedgeDS_list.h
+ /opt/local/include/CGAL/HalfedgeDS_vertex_base.h
  /opt/local/include/CGAL/Handle.h
  /opt/local/include/CGAL/Handle_for.h
  /opt/local/include/CGAL/Handle_for_virtual.h
+ /opt/local/include/CGAL/Handle_hash_function.h
  /opt/local/include/CGAL/Has_timestamp.h
+ /opt/local/include/CGAL/Hilbert_policy_tags.h
+ /opt/local/include/CGAL/Hilbert_sort_2.h
+ /opt/local/include/CGAL/Hilbert_sort_3.h
+ /opt/local/include/CGAL/Hilbert_sort_base.h
+ /opt/local/include/CGAL/Hilbert_sort_d.h
+ /opt/local/include/CGAL/Hilbert_sort_median_2.h
+ /opt/local/include/CGAL/Hilbert_sort_median_3.h
+ /opt/local/include/CGAL/Hilbert_sort_median_d.h
+ /opt/local/include/CGAL/Hilbert_sort_middle_2.h
+ /opt/local/include/CGAL/Hilbert_sort_middle_3.h
+ /opt/local/include/CGAL/Hilbert_sort_middle_base.h
+ /opt/local/include/CGAL/Hilbert_sort_middle_d.h
  /opt/local/include/CGAL/Homogeneous/Aff_transformationH2.h
  /opt/local/include/CGAL/Homogeneous/Aff_transformationH3.h
  /opt/local/include/CGAL/Homogeneous/Data_accessorH2.h
@@ -185,8 +222,23 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Homogeneous_converter.h
  /opt/local/include/CGAL/IEEE_754_unions.h
  /opt/local/include/CGAL/IO/Color.h
+ /opt/local/include/CGAL/IO/Complex_2_in_triangulation_3_polyhedron_builder.h
+ /opt/local/include/CGAL/IO/File_header_OFF.h
+ /opt/local/include/CGAL/IO/File_header_extended_OFF.h
+ /opt/local/include/CGAL/IO/File_scanner_OFF.h
+ /opt/local/include/CGAL/IO/File_writer_OFF.h
+ /opt/local/include/CGAL/IO/Polyhedron_iostream.h
+ /opt/local/include/CGAL/IO/Polyhedron_scan_OFF.h
+ /opt/local/include/CGAL/IO/Verbose_ostream.h
+ /opt/local/include/CGAL/IO/binary_file_io.h
+ /opt/local/include/CGAL/IO/generic_print_polyhedron.h
  /opt/local/include/CGAL/IO/io.h
  /opt/local/include/CGAL/IO/io_tags.h
+ /opt/local/include/CGAL/IO/output_surface_facets_to_polyhedron.h
+ /opt/local/include/CGAL/IO/print_OFF.h
+ /opt/local/include/CGAL/IO/scan_OFF.h
+ /opt/local/include/CGAL/Implicit_surface_3.h
+ /opt/local/include/CGAL/In_place_list.h
  /opt/local/include/CGAL/Index_property_map.h
  /opt/local/include/CGAL/Intersection_traits.h
  /opt/local/include/CGAL/Intersection_traits_2.h
@@ -196,9 +248,12 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Interval_arithmetic.h
  /opt/local/include/CGAL/Interval_nt.h
  /opt/local/include/CGAL/Interval_traits.h
+ /opt/local/include/CGAL/Inverse_index.h
  /opt/local/include/CGAL/Iso_cuboid_3.h
  /opt/local/include/CGAL/Iso_rectangle_2.h
  /opt/local/include/CGAL/Iso_rectangle_2_Iso_rectangle_2_intersection.h
+ /opt/local/include/CGAL/Iterator_project.h
+ /opt/local/include/CGAL/Iterator_range.h
  /opt/local/include/CGAL/Kd_tree.h
  /opt/local/include/CGAL/Kd_tree_node.h
  /opt/local/include/CGAL/Kd_tree_rectangle.h
@@ -227,20 +282,46 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/LEDA_basic.h
  /opt/local/include/CGAL/Lazy.h
  /opt/local/include/CGAL/Lazy_exact_nt.h
+ /opt/local/include/CGAL/Lazy_kernel.h
+ /opt/local/include/CGAL/Lightweight_vector_3.h
  /opt/local/include/CGAL/Line_2.h
  /opt/local/include/CGAL/Line_2_Iso_rectangle_2_intersection.h
  /opt/local/include/CGAL/Line_2_Line_2_intersection.h
  /opt/local/include/CGAL/Line_2_Triangle_2_intersection.h
  /opt/local/include/CGAL/Line_3.h
  /opt/local/include/CGAL/Linear_algebraCd.h
+ /opt/local/include/CGAL/Location_policy.h
  /opt/local/include/CGAL/MP_Float.h
  /opt/local/include/CGAL/MP_Float_arithmetic_kernel.h
  /opt/local/include/CGAL/MP_Float_impl.h
  /opt/local/include/CGAL/Memory_sizer.h
+ /opt/local/include/CGAL/Mesh_2/Output_stream.h
+ /opt/local/include/CGAL/Mesh_3/Poisson_refine_cells_3.h
+ /opt/local/include/CGAL/Mesh_3/Profiling_tools.h
+ /opt/local/include/CGAL/Mesher_level.h
+ /opt/local/include/CGAL/Mesher_level_default_implementations.h
+ /opt/local/include/CGAL/Mesher_level_visitors.h
+ /opt/local/include/CGAL/Meshes/Double_map_container.h
+ /opt/local/include/CGAL/Meshes/Simple_map_container.h
+ /opt/local/include/CGAL/Meshes/Triangulation_mesher_level_traits_3.h
+ /opt/local/include/CGAL/Min_sphere_of_points_d_traits_3.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_configure.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_impl.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_pair.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_pivot_impl.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_support_set.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_support_set_impl.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d_traits_2.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d_traits_3.h
+ /opt/local/include/CGAL/Min_sphere_of_spheres_d_traits_d.h
+ /opt/local/include/CGAL/Modifier_base.h
  /opt/local/include/CGAL/Modular_arithmetic/Residue_type.h
  /opt/local/include/CGAL/Modular_traits.h
  /opt/local/include/CGAL/Mpzf.h
+ /opt/local/include/CGAL/Multiscale_sort.h
  /opt/local/include/CGAL/NT_converter.h
+ /opt/local/include/CGAL/N_step_adaptor_derived.h
  /opt/local/include/CGAL/Needs_parens_as_product.h
  /opt/local/include/CGAL/Object.h
  /opt/local/include/CGAL/Origin.h
@@ -257,9 +338,23 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Point_2_Triangle_2_intersection.h
  /opt/local/include/CGAL/Point_3.h
  /opt/local/include/CGAL/Point_container.h
+ /opt/local/include/CGAL/Point_with_normal_3.h
+ /opt/local/include/CGAL/Poisson_mesh_cell_criteria_3.h
+ /opt/local/include/CGAL/Poisson_reconstruction_function.h
+ /opt/local/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h
+ /opt/local/include/CGAL/Polygon_2/Polygon_2_simplicity.h
+ /opt/local/include/CGAL/Polygon_2/polygon_assertions.h
+ /opt/local/include/CGAL/Polygon_2_algorithms.h
+ /opt/local/include/CGAL/Polyhedron_3.h
+ /opt/local/include/CGAL/Polyhedron_incremental_builder_3.h
+ /opt/local/include/CGAL/Polyhedron_items_3.h
+ /opt/local/include/CGAL/Polyhedron_traits_3.h
  /opt/local/include/CGAL/Profile_counter.h
+ /opt/local/include/CGAL/Profile_timer.h
  /opt/local/include/CGAL/Quotient.h
  /opt/local/include/CGAL/Quotient_fwd.h
+ /opt/local/include/CGAL/Random.h
+ /opt/local/include/CGAL/Random_access_adaptor.h
  /opt/local/include/CGAL/Rational_traits.h
  /opt/local/include/CGAL/Ray_2.h
  /opt/local/include/CGAL/Ray_2_Iso_rectangle_2_intersection.h
@@ -269,7 +364,13 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Ray_2_Triangle_2_intersection.h
  /opt/local/include/CGAL/Ray_3.h
  /opt/local/include/CGAL/Real_embeddable_traits.h
+ /opt/local/include/CGAL/Real_timer.h
+ /opt/local/include/CGAL/Reconstruction_triangulation_3.h
+ /opt/local/include/CGAL/Regular_triangulation_euclidean_traits_3.h
  /opt/local/include/CGAL/Residue.h
+ /opt/local/include/CGAL/Robust_circumcenter_filtered_traits_3.h
+ /opt/local/include/CGAL/Robust_circumcenter_traits_3.h
+ /opt/local/include/CGAL/Robust_construction.h
  /opt/local/include/CGAL/Scalar_factor_traits.h
  /opt/local/include/CGAL/Search_traits.h
  /opt/local/include/CGAL/Search_traits_3.h
@@ -282,6 +383,8 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Segment_3.h
  /opt/local/include/CGAL/Simple_cartesian.h
  /opt/local/include/CGAL/Simple_homogeneous.h
+ /opt/local/include/CGAL/Spatial_lock_grid_3.h
+ /opt/local/include/CGAL/Spatial_sort_traits_adapter_3.h
  /opt/local/include/CGAL/Sphere_3.h
  /opt/local/include/CGAL/Splitters.h
  /opt/local/include/CGAL/Sqrt_extension.h
@@ -301,8 +404,31 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Sqrt_extension/io.h
  /opt/local/include/CGAL/Sqrt_extension_fwd.h
  /opt/local/include/CGAL/Straight_2.h
+ /opt/local/include/CGAL/Surface_mesh_cell_base_3.h
+ /opt/local/include/CGAL/Surface_mesh_complex_2_in_triangulation_3.h
+ /opt/local/include/CGAL/Surface_mesh_default_criteria_3.h
+ /opt/local/include/CGAL/Surface_mesh_default_triangulation_3.h
+ /opt/local/include/CGAL/Surface_mesh_traits_generator_3.h
+ /opt/local/include/CGAL/Surface_mesh_vertex_base_3.h
+ /opt/local/include/CGAL/Surface_mesher/Implicit_surface_oracle_3.h
+ /opt/local/include/CGAL/Surface_mesher/Null_oracle_visitor.h
+ /opt/local/include/CGAL/Surface_mesher/Profile_counter.h
+ /opt/local/include/CGAL/Surface_mesher/Profile_timer.h
+ /opt/local/include/CGAL/Surface_mesher/Sphere_oracle_3.h
+ /opt/local/include/CGAL/Surface_mesher/Standard_criteria.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher_edges_level.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher_edges_level_visitor.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher_manifold.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher_regular_edges.h
+ /opt/local/include/CGAL/Surface_mesher/Surface_mesher_visitor.h
+ /opt/local/include/CGAL/Surface_mesher/Types_generators.h
+ /opt/local/include/CGAL/Surface_mesher/Verbose_flag.h
+ /opt/local/include/CGAL/Surface_mesher_generator.h
  /opt/local/include/CGAL/Tetrahedron_3.h
  /opt/local/include/CGAL/Time_stamper.h
+ /opt/local/include/CGAL/Timer.h
+ /opt/local/include/CGAL/Tools/chained_map.h
  /opt/local/include/CGAL/Triangle_2.h
  /opt/local/include/CGAL/Triangle_2_Iso_rectangle_2_intersection.h
  /opt/local/include/CGAL/Triangle_2_Line_2_intersection.h
@@ -319,9 +445,25 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/Triangle_3_Tetrahedron_3_do_intersect.h
  /opt/local/include/CGAL/Triangle_3_Triangle_3_do_intersect.h
  /opt/local/include/CGAL/Triangle_3_Triangle_3_intersection.h
+ /opt/local/include/CGAL/Triangulation_3.h
+ /opt/local/include/CGAL/Triangulation_cell_base_3.h
+ /opt/local/include/CGAL/Triangulation_cell_base_with_info_3.h
+ /opt/local/include/CGAL/Triangulation_data_structure_3.h
+ /opt/local/include/CGAL/Triangulation_ds_cell_base_3.h
+ /opt/local/include/CGAL/Triangulation_ds_vertex_base_3.h
+ /opt/local/include/CGAL/Triangulation_hierarchy_3.h
+ /opt/local/include/CGAL/Triangulation_hierarchy_vertex_base_3.h
+ /opt/local/include/CGAL/Triangulation_simplex_3.h
+ /opt/local/include/CGAL/Triangulation_structural_filtering_traits.h
+ /opt/local/include/CGAL/Triangulation_utils_2.h
+ /opt/local/include/CGAL/Triangulation_utils_3.h
+ /opt/local/include/CGAL/Triangulation_vertex_base_3.h
  /opt/local/include/CGAL/Uncertain.h
+ /opt/local/include/CGAL/Union_find.h
+ /opt/local/include/CGAL/Unique_hash_map.h
  /opt/local/include/CGAL/Vector_2.h
  /opt/local/include/CGAL/Vector_3.h
+ /opt/local/include/CGAL/Weighted_point.h
  /opt/local/include/CGAL/aff_transformation_tags.h
  /opt/local/include/CGAL/algorithm.h
  /opt/local/include/CGAL/array.h
@@ -331,8 +473,16 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/basic.h
  /opt/local/include/CGAL/basic_classes.h
  /opt/local/include/CGAL/bbox_intersection_3.h
+ /opt/local/include/CGAL/boost/graph/backward_compatibility_functions.h
  /opt/local/include/CGAL/boost/graph/dijkstra_shortest_paths.h
  /opt/local/include/CGAL/boost/graph/dijkstra_shortest_paths.hpp
+ /opt/local/include/CGAL/boost/graph/graph_traits_HalfedgeDS.h
+ /opt/local/include/CGAL/boost/graph/graph_traits_Polyhedron_3.h
+ /opt/local/include/CGAL/boost/graph/halfedge_graph_traits.h
+ /opt/local/include/CGAL/boost/graph/internal/helpers.h
+ /opt/local/include/CGAL/boost/graph/iterator.h
+ /opt/local/include/CGAL/boost/graph/properties.h
+ /opt/local/include/CGAL/boost/graph/properties_Polyhedron_3.h
  /opt/local/include/CGAL/boost/iterator/transform_iterator.hpp
  /opt/local/include/CGAL/centroid.h
  /opt/local/include/CGAL/circulator.h
@@ -341,6 +491,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/compute_average_spacing.h
  /opt/local/include/CGAL/config.h
  /opt/local/include/CGAL/constant.h
+ /opt/local/include/CGAL/constructions/constructions_on_weighted_points_cartesian_3.h
  /opt/local/include/CGAL/constructions/kernel_ftC2.h
  /opt/local/include/CGAL/constructions/kernel_ftC3.h
  /opt/local/include/CGAL/convert_to_bfi.h
@@ -353,10 +504,14 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/extended_euclidean_algorithm.h
  /opt/local/include/CGAL/float.h
  /opt/local/include/CGAL/function_objects.h
+ /opt/local/include/CGAL/generators.h
  /opt/local/include/CGAL/gmp.h
  /opt/local/include/CGAL/gmpxx.h
  /opt/local/include/CGAL/gmpxx_coercion_traits.h
+ /opt/local/include/CGAL/hilbert_sort.h
  /opt/local/include/CGAL/int.h
+ /opt/local/include/CGAL/internal/Delaunay_triangulation_hierarchy_3.h
+ /opt/local/include/CGAL/internal/Dummy_tds_3.h
  /opt/local/include/CGAL/internal/Exact_type_selector.h
  /opt/local/include/CGAL/internal/Get_dimension_tag.h
  /opt/local/include/CGAL/internal/Intersections_3/Bbox_3_Bbox_3_do_intersect.h
@@ -370,20 +525,28 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/internal/Intersections_3/Triangle_3_Ray_3_intersection.h
  /opt/local/include/CGAL/internal/Intersections_3/Triangle_3_Segment_3_intersection.h
  /opt/local/include/CGAL/internal/K_neighbor_search.h
+ /opt/local/include/CGAL/internal/Regular_triangulation_filtered_traits_3.h
  /opt/local/include/CGAL/internal/Static_filters/Angle_3.h
  /opt/local/include/CGAL/internal/Static_filters/Compare_squared_radius_3.h
+ /opt/local/include/CGAL/internal/Static_filters/Compare_weighted_squared_radius_3.h
  /opt/local/include/CGAL/internal/Static_filters/Compare_y_at_x_2.h
  /opt/local/include/CGAL/internal/Static_filters/Do_intersect_3.h
  /opt/local/include/CGAL/internal/Static_filters/Equal_3.h
  /opt/local/include/CGAL/internal/Static_filters/Is_degenerate_3.h
  /opt/local/include/CGAL/internal/Static_filters/Orientation_2.h
  /opt/local/include/CGAL/internal/Static_filters/Orientation_3.h
+ /opt/local/include/CGAL/internal/Static_filters/Power_test_3.h
+ /opt/local/include/CGAL/internal/Static_filters/Regular_triangulation_static_filters_traits_3.h
  /opt/local/include/CGAL/internal/Static_filters/Side_of_oriented_circle_2.h
  /opt/local/include/CGAL/internal/Static_filters/Side_of_oriented_sphere_3.h
  /opt/local/include/CGAL/internal/Static_filters/Static_filter_error.h
  /opt/local/include/CGAL/internal/Static_filters/Static_filters.h
  /opt/local/include/CGAL/internal/Static_filters/tools.h
+ /opt/local/include/CGAL/internal/Triangulation_ds_circulators_3.h
+ /opt/local/include/CGAL/internal/Triangulation_ds_iterators_3.h
  /opt/local/include/CGAL/internal/bounded_priority_queue.h
+ /opt/local/include/CGAL/internal/container_fwd_fixed.hpp
+ /opt/local/include/CGAL/internal/info_check.h
  /opt/local/include/CGAL/intersection_2.h
  /opt/local/include/CGAL/intersection_2_1.h
  /opt/local/include/CGAL/intersection_2_2.h
@@ -413,6 +576,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/linear_least_squares_fitting_triangles_3.h
  /opt/local/include/CGAL/long_double.h
  /opt/local/include/CGAL/long_long.h
+ /opt/local/include/CGAL/make_surface_mesh.h
  /opt/local/include/CGAL/memory.h
  /opt/local/include/CGAL/min_max_n.h
  /opt/local/include/CGAL/mpfi_coercion_traits.h
@@ -425,15 +589,22 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/number_utils.h
  /opt/local/include/CGAL/number_utils_classes.h
  /opt/local/include/CGAL/pca_estimate_normals.h
+ /opt/local/include/CGAL/point_generators_2.h
+ /opt/local/include/CGAL/point_generators_3.h
  /opt/local/include/CGAL/point_set_processing_assertions.h
+ /opt/local/include/CGAL/poisson_refine_triangulation.h
+ /opt/local/include/CGAL/predicates/Regular_triangulation_ftC3.h
+ /opt/local/include/CGAL/predicates/Regular_triangulation_rtH3.h
  /opt/local/include/CGAL/predicates/kernel_ftC2.h
  /opt/local/include/CGAL/predicates/kernel_ftC3.h
+ /opt/local/include/CGAL/predicates/predicates_on_weighted_points_cartesian_3.h
  /opt/local/include/CGAL/predicates/sign_of_determinant.h
  /opt/local/include/CGAL/predicates_on_points_2.h
  /opt/local/include/CGAL/property_map.h
  /opt/local/include/CGAL/rational_rotation.h
  /opt/local/include/CGAL/representation_tags.h
  /opt/local/include/CGAL/result_of.h
+ /opt/local/include/CGAL/spatial_sort.h
  /opt/local/include/CGAL/squared_distance_2.h
  /opt/local/include/CGAL/squared_distance_2_1.h
  /opt/local/include/CGAL/squared_distance_2_2.h
@@ -443,12 +614,15 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/CGAL/squared_distance_3_2.h
  /opt/local/include/CGAL/squared_distance_utils.h
  /opt/local/include/CGAL/sse2.h
+ /opt/local/include/CGAL/surface_reconstruction_points_assertions.h
  /opt/local/include/CGAL/tags.h
  /opt/local/include/CGAL/trace.h
+ /opt/local/include/CGAL/triangulation_assertions.h
  /opt/local/include/CGAL/tuple.h
  /opt/local/include/CGAL/type_traits.h
  /opt/local/include/CGAL/use.h
  /opt/local/include/CGAL/user_classes.h
+ /opt/local/include/CGAL/utility.h
  /opt/local/include/CGAL/utils.h
  /opt/local/include/CGAL/utils_classes.h
  /opt/local/include/CGAL/value_type_traits.h
@@ -483,6 +657,74 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/archive/detail/register_archive.hpp
  /opt/local/include/boost/array.hpp
  /opt/local/include/boost/assert.hpp
+ /opt/local/include/boost/bimap.hpp
+ /opt/local/include/boost/bimap/bimap.hpp
+ /opt/local/include/boost/bimap/container_adaptor/associative_container_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/container_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/detail/comparison_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/detail/functor_bag.hpp
+ /opt/local/include/boost/bimap/container_adaptor/detail/identity_converters.hpp
+ /opt/local/include/boost/bimap/container_adaptor/detail/non_unique_container_helper.hpp
+ /opt/local/include/boost/bimap/container_adaptor/map_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/multimap_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/multiset_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/ordered_associative_container_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/set_adaptor.hpp
+ /opt/local/include/boost/bimap/container_adaptor/support/iterator_facade_converters.hpp
+ /opt/local/include/boost/bimap/detail/bimap_core.hpp
+ /opt/local/include/boost/bimap/detail/concept_tags.hpp
+ /opt/local/include/boost/bimap/detail/debug/static_error.hpp
+ /opt/local/include/boost/bimap/detail/generate_index_binder.hpp
+ /opt/local/include/boost/bimap/detail/generate_relation_binder.hpp
+ /opt/local/include/boost/bimap/detail/generate_view_binder.hpp
+ /opt/local/include/boost/bimap/detail/is_set_type_of.hpp
+ /opt/local/include/boost/bimap/detail/manage_additional_parameters.hpp
+ /opt/local/include/boost/bimap/detail/manage_bimap_key.hpp
+ /opt/local/include/boost/bimap/detail/map_view_base.hpp
+ /opt/local/include/boost/bimap/detail/map_view_iterator.hpp
+ /opt/local/include/boost/bimap/detail/modifier_adaptor.hpp
+ /opt/local/include/boost/bimap/detail/non_unique_views_helper.hpp
+ /opt/local/include/boost/bimap/detail/set_view_base.hpp
+ /opt/local/include/boost/bimap/detail/set_view_iterator.hpp
+ /opt/local/include/boost/bimap/detail/user_interface_config.hpp
+ /opt/local/include/boost/bimap/multiset_of.hpp
+ /opt/local/include/boost/bimap/relation/detail/access_builder.hpp
+ /opt/local/include/boost/bimap/relation/detail/metadata_access_builder.hpp
+ /opt/local/include/boost/bimap/relation/detail/mutant.hpp
+ /opt/local/include/boost/bimap/relation/detail/static_access_builder.hpp
+ /opt/local/include/boost/bimap/relation/detail/to_mutable_relation_functor.hpp
+ /opt/local/include/boost/bimap/relation/member_at.hpp
+ /opt/local/include/boost/bimap/relation/mutant_relation.hpp
+ /opt/local/include/boost/bimap/relation/pair_layout.hpp
+ /opt/local/include/boost/bimap/relation/structured_pair.hpp
+ /opt/local/include/boost/bimap/relation/support/data_extractor.hpp
+ /opt/local/include/boost/bimap/relation/support/get.hpp
+ /opt/local/include/boost/bimap/relation/support/get_pair_functor.hpp
+ /opt/local/include/boost/bimap/relation/support/is_tag_of_member_at.hpp
+ /opt/local/include/boost/bimap/relation/support/member_with_tag.hpp
+ /opt/local/include/boost/bimap/relation/support/opposite_tag.hpp
+ /opt/local/include/boost/bimap/relation/support/pair_by.hpp
+ /opt/local/include/boost/bimap/relation/support/pair_type_by.hpp
+ /opt/local/include/boost/bimap/relation/support/value_type_of.hpp
+ /opt/local/include/boost/bimap/relation/symmetrical_base.hpp
+ /opt/local/include/boost/bimap/set_of.hpp
+ /opt/local/include/boost/bimap/support/data_type_by.hpp
+ /opt/local/include/boost/bimap/support/iterator_type_by.hpp
+ /opt/local/include/boost/bimap/support/key_type_by.hpp
+ /opt/local/include/boost/bimap/support/map_by.hpp
+ /opt/local/include/boost/bimap/support/map_type_by.hpp
+ /opt/local/include/boost/bimap/support/value_type_by.hpp
+ /opt/local/include/boost/bimap/tags/support/default_tagged.hpp
+ /opt/local/include/boost/bimap/tags/support/tag_of.hpp
+ /opt/local/include/boost/bimap/tags/support/value_type_of.hpp
+ /opt/local/include/boost/bimap/tags/tagged.hpp
+ /opt/local/include/boost/bimap/unconstrained_set_of.hpp
+ /opt/local/include/boost/bimap/views/map_view.hpp
+ /opt/local/include/boost/bimap/views/multimap_view.hpp
+ /opt/local/include/boost/bimap/views/multiset_view.hpp
+ /opt/local/include/boost/bimap/views/set_view.hpp
+ /opt/local/include/boost/bimap/views/unconstrained_map_view.hpp
+ /opt/local/include/boost/bimap/views/unconstrained_set_view.hpp
  /opt/local/include/boost/bind.hpp
  /opt/local/include/boost/bind/arg.hpp
  /opt/local/include/boost/bind/bind.hpp
@@ -706,7 +948,27 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/dynamic_bitset_fwd.hpp
  /opt/local/include/boost/enable_shared_from_this.hpp
  /opt/local/include/boost/exception/exception.hpp
+ /opt/local/include/boost/foreach.hpp
  /opt/local/include/boost/foreach_fwd.hpp
+ /opt/local/include/boost/format.hpp
+ /opt/local/include/boost/format/alt_sstream.hpp
+ /opt/local/include/boost/format/alt_sstream_impl.hpp
+ /opt/local/include/boost/format/detail/compat_workarounds.hpp
+ /opt/local/include/boost/format/detail/config_macros.hpp
+ /opt/local/include/boost/format/detail/msvc_disambiguater.hpp
+ /opt/local/include/boost/format/detail/unset_macros.hpp
+ /opt/local/include/boost/format/detail/workarounds_gcc-2_95.hpp
+ /opt/local/include/boost/format/detail/workarounds_stlport.hpp
+ /opt/local/include/boost/format/exceptions.hpp
+ /opt/local/include/boost/format/feed_args.hpp
+ /opt/local/include/boost/format/format_class.hpp
+ /opt/local/include/boost/format/format_fwd.hpp
+ /opt/local/include/boost/format/format_implementation.hpp
+ /opt/local/include/boost/format/free_funcs.hpp
+ /opt/local/include/boost/format/group.hpp
+ /opt/local/include/boost/format/internals.hpp
+ /opt/local/include/boost/format/internals_fwd.hpp
+ /opt/local/include/boost/format/parsing.hpp
  /opt/local/include/boost/function/detail/maybe_include.hpp
  /opt/local/include/boost/function/detail/prologue.hpp
  /opt/local/include/boost/function/function1.hpp
@@ -771,6 +1033,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/integer.hpp
  /opt/local/include/boost/integer/common_factor_rt.hpp
  /opt/local/include/boost/integer/integer_log2.hpp
+ /opt/local/include/boost/integer/integer_mask.hpp
  /opt/local/include/boost/integer/static_log2.hpp
  /opt/local/include/boost/integer_fwd.hpp
  /opt/local/include/boost/integer_traits.hpp
@@ -800,8 +1063,10 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/iterator/iterator_concepts.hpp
  /opt/local/include/boost/iterator/iterator_facade.hpp
  /opt/local/include/boost/iterator/iterator_traits.hpp
+ /opt/local/include/boost/iterator/minimum_category.hpp
  /opt/local/include/boost/iterator/reverse_iterator.hpp
  /opt/local/include/boost/iterator/transform_iterator.hpp
+ /opt/local/include/boost/iterator/zip_iterator.hpp
  /opt/local/include/boost/limits.hpp
  /opt/local/include/boost/make_shared.hpp
  /opt/local/include/boost/math/common_factor_ct.hpp
@@ -979,6 +1244,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/mpl/distance.hpp
  /opt/local/include/boost/mpl/distance_fwd.hpp
  /opt/local/include/boost/mpl/empty.hpp
+ /opt/local/include/boost/mpl/empty_base.hpp
  /opt/local/include/boost/mpl/empty_fwd.hpp
  /opt/local/include/boost/mpl/end.hpp
  /opt/local/include/boost/mpl/equal.hpp
@@ -999,6 +1265,8 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/mpl/has_xxx.hpp
  /opt/local/include/boost/mpl/identity.hpp
  /opt/local/include/boost/mpl/if.hpp
+ /opt/local/include/boost/mpl/inherit.hpp
+ /opt/local/include/boost/mpl/inherit_linearly.hpp
  /opt/local/include/boost/mpl/insert.hpp
  /opt/local/include/boost/mpl/insert_fwd.hpp
  /opt/local/include/boost/mpl/insert_range_fwd.hpp
@@ -1118,6 +1386,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/multi_index/detail/converter.hpp
  /opt/local/include/boost/multi_index/detail/copy_map.hpp
  /opt/local/include/boost/multi_index/detail/do_not_copy_elements_tag.hpp
+ /opt/local/include/boost/multi_index/detail/duplicates_iterator.hpp
  /opt/local/include/boost/multi_index/detail/has_tag.hpp
  /opt/local/include/boost/multi_index/detail/hash_index_args.hpp
  /opt/local/include/boost/multi_index/detail/hash_index_iterator.hpp
@@ -1136,7 +1405,10 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/multi_index/detail/no_duplicate_tags.hpp
  /opt/local/include/boost/multi_index/detail/node_type.hpp
  /opt/local/include/boost/multi_index/detail/ord_index_args.hpp
+ /opt/local/include/boost/multi_index/detail/ord_index_impl.hpp
  /opt/local/include/boost/multi_index/detail/ord_index_impl_fwd.hpp
+ /opt/local/include/boost/multi_index/detail/ord_index_node.hpp
+ /opt/local/include/boost/multi_index/detail/ord_index_ops.hpp
  /opt/local/include/boost/multi_index/detail/promotes_arg.hpp
  /opt/local/include/boost/multi_index/detail/raw_ptr.hpp
  /opt/local/include/boost/multi_index/detail/safe_mode.hpp
@@ -1144,6 +1416,9 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/multi_index/detail/seq_index_node.hpp
  /opt/local/include/boost/multi_index/detail/seq_index_ops.hpp
  /opt/local/include/boost/multi_index/detail/serialization_version.hpp
+ /opt/local/include/boost/multi_index/detail/uintptr_type.hpp
+ /opt/local/include/boost/multi_index/detail/unbounded.hpp
+ /opt/local/include/boost/multi_index/detail/value_compare.hpp
  /opt/local/include/boost/multi_index/detail/vartempl_support.hpp
  /opt/local/include/boost/multi_index/hashed_index.hpp
  /opt/local/include/boost/multi_index/hashed_index_fwd.hpp
@@ -1151,6 +1426,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/multi_index/identity_fwd.hpp
  /opt/local/include/boost/multi_index/indexed_by.hpp
  /opt/local/include/boost/multi_index/member.hpp
+ /opt/local/include/boost/multi_index/ordered_index.hpp
  /opt/local/include/boost/multi_index/ordered_index_fwd.hpp
  /opt/local/include/boost/multi_index/safe_mode_errors.hpp
  /opt/local/include/boost/multi_index/sequenced_index.hpp
@@ -1577,6 +1853,68 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/boost/property_map/property_map_iterator.hpp
  /opt/local/include/boost/property_map/shared_array_property_map.hpp
  /opt/local/include/boost/property_map/vector_property_map.hpp
+ /opt/local/include/boost/random.hpp
+ /opt/local/include/boost/random/additive_combine.hpp
+ /opt/local/include/boost/random/bernoulli_distribution.hpp
+ /opt/local/include/boost/random/binomial_distribution.hpp
+ /opt/local/include/boost/random/cauchy_distribution.hpp
+ /opt/local/include/boost/random/chi_squared_distribution.hpp
+ /opt/local/include/boost/random/detail/config.hpp
+ /opt/local/include/boost/random/detail/const_mod.hpp
+ /opt/local/include/boost/random/detail/disable_warnings.hpp
+ /opt/local/include/boost/random/detail/enable_warnings.hpp
+ /opt/local/include/boost/random/detail/generator_bits.hpp
+ /opt/local/include/boost/random/detail/generator_seed_seq.hpp
+ /opt/local/include/boost/random/detail/integer_log2.hpp
+ /opt/local/include/boost/random/detail/large_arithmetic.hpp
+ /opt/local/include/boost/random/detail/operators.hpp
+ /opt/local/include/boost/random/detail/polynomial.hpp
+ /opt/local/include/boost/random/detail/ptr_helper.hpp
+ /opt/local/include/boost/random/detail/seed.hpp
+ /opt/local/include/boost/random/detail/seed_impl.hpp
+ /opt/local/include/boost/random/detail/signed_unsigned_tools.hpp
+ /opt/local/include/boost/random/detail/uniform_int_float.hpp
+ /opt/local/include/boost/random/detail/vector_io.hpp
+ /opt/local/include/boost/random/discard_block.hpp
+ /opt/local/include/boost/random/discrete_distribution.hpp
+ /opt/local/include/boost/random/exponential_distribution.hpp
+ /opt/local/include/boost/random/extreme_value_distribution.hpp
+ /opt/local/include/boost/random/fisher_f_distribution.hpp
+ /opt/local/include/boost/random/gamma_distribution.hpp
+ /opt/local/include/boost/random/generate_canonical.hpp
+ /opt/local/include/boost/random/geometric_distribution.hpp
+ /opt/local/include/boost/random/independent_bits.hpp
+ /opt/local/include/boost/random/inversive_congruential.hpp
+ /opt/local/include/boost/random/lagged_fibonacci.hpp
+ /opt/local/include/boost/random/linear_congruential.hpp
+ /opt/local/include/boost/random/linear_feedback_shift.hpp
+ /opt/local/include/boost/random/lognormal_distribution.hpp
+ /opt/local/include/boost/random/mersenne_twister.hpp
+ /opt/local/include/boost/random/negative_binomial_distribution.hpp
+ /opt/local/include/boost/random/non_central_chi_squared_distribution.hpp
+ /opt/local/include/boost/random/normal_distribution.hpp
+ /opt/local/include/boost/random/piecewise_constant_distribution.hpp
+ /opt/local/include/boost/random/piecewise_linear_distribution.hpp
+ /opt/local/include/boost/random/poisson_distribution.hpp
+ /opt/local/include/boost/random/random_number_generator.hpp
+ /opt/local/include/boost/random/ranlux.hpp
+ /opt/local/include/boost/random/seed_seq.hpp
+ /opt/local/include/boost/random/shuffle_order.hpp
+ /opt/local/include/boost/random/shuffle_output.hpp
+ /opt/local/include/boost/random/student_t_distribution.hpp
+ /opt/local/include/boost/random/subtract_with_carry.hpp
+ /opt/local/include/boost/random/taus88.hpp
+ /opt/local/include/boost/random/triangle_distribution.hpp
+ /opt/local/include/boost/random/uniform_01.hpp
+ /opt/local/include/boost/random/uniform_int.hpp
+ /opt/local/include/boost/random/uniform_int_distribution.hpp
+ /opt/local/include/boost/random/uniform_on_sphere.hpp
+ /opt/local/include/boost/random/uniform_real.hpp
+ /opt/local/include/boost/random/uniform_real_distribution.hpp
+ /opt/local/include/boost/random/uniform_smallint.hpp
+ /opt/local/include/boost/random/variate_generator.hpp
+ /opt/local/include/boost/random/weibull_distribution.hpp
+ /opt/local/include/boost/random/xor_combine.hpp
  /opt/local/include/boost/range/algorithm/equal.hpp
  /opt/local/include/boost/range/begin.hpp
  /opt/local/include/boost/range/concepts.hpp
@@ -1998,6 +2336,7 @@ CMakeFiles/pick.dir/Viewer.cpp.o
  /opt/local/include/gmp.h
  /opt/local/include/gmpxx.h
  /opt/local/include/mpfr.h
+ AntTweakBar.h
  eigen/Eigen/Core
  eigen/Eigen/Eigen2Support
  eigen/Eigen/src/Core/Array.h

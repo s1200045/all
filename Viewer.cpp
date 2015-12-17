@@ -10,6 +10,16 @@
 #include <utility>
 #include <fstream>
 #include <CGAL/compute_average_spacing.h>
+#include <AntTweakBar.h>
+#include <CGAL/Poisson_reconstruction_function.h>
+#include <CGAL/make_surface_mesh.h>
+#include <CGAL/Polyhedron_3.h>
+#include <CGAL/IO/Polyhedron_iostream.h>
+#include <CGAL/IO/output_surface_facets_to_polyhedron.h>
+#include <CGAL/trace.h>
+#include <CGAL/Implicit_surface_3.h>
+#include <CGAL/Surface_mesh_default_triangulation_3.h>
+#include <CGAL/trace.h>
 
 #include <cstdlib>
 #include <iostream>
@@ -52,6 +62,15 @@ typedef Eigen::Matrix<double,3,1> Vector3;
 bool flag=0;
 CIsoSurface <double> *ciso = new CIsoSurface <double> ();
 TriMesh Viewer::marching;
+TwBar *myBar;
+typedef CGAL::Poisson_reconstruction_function<Kernel> Poisson_reconstruction_function;
+typedef Kernel::FT FT;
+typedef CGAL::Surface_mesh_default_triangulation_3 STr;
+typedef CGAL::Surface_mesh_complex_2_in_triangulation_3<STr> C2t3;
+typedef Kernel::Sphere_3 Sphere;
+typedef CGAL::Implicit_surface_3<Kernel, Poisson_reconstruction_function> Surface_3;
+
+typedef CGAL::Polyhedron_3<Kernel> Polyhedron;
 
 
 void
@@ -91,6 +110,7 @@ Viewer::init(int argc, char** argv)
     initGLSL();
     setGL();
     updateDisplayList();
+   // TwInit(TW_OPENGL, NULL);
     glutMainLoop();
 }
    
@@ -676,15 +696,18 @@ void createOFFFile2(const std::string& outFileName){
     }
     
 }
-void Wendland_gradphi(Vector3 p,std::vector<Vector3>& centers,double rho,std::vector<double>& g){
+/*void Wendland_gradphi(Vector3 p,std::vector<Vector3>& centers,double rho,std::vector<double>& g){
     for(int i=0;i<centers.size();i++){
         double r=sqrt(pow((p(0)-centers[i](0)),2)+pow((p(1)-centers[i](1)),2)+pow((p(2)-centers[i](2)),2));
-        if (r <= rho&&(p(0)!=centers[i](0)||p(1)!=centers[i](1)||p(2)!=centers[i](2))!=0){
-            g[i*3]=-20.0/pow(rho,2)*(p(0)-centers[i](0))*pow((1.0-r/rho),3);
-            g[i*3+1]=-20.0/pow(rho,2)*(p(1)-centers[i](1))*pow((1.0-r/rho),3);
-            g[i*3+2]=-20.0/pow(rho,2)*(p(2)-centers[i](2))*pow((1.0-r/rho),3);
+        std::cout<<r<<std::endl;
+        if (r <= rho&&(p(0)!=centers[i](0)+p(1)!=centers[i](1)+p(2)!=centers[i](2))!=0){
+            g[i*3]=-20.0/(rho*rho)*(p(0)-centers[i](0))*((1.0-r/rho)*(1.0-r/rho)*(1.0-r/rho));
+            g[i*3+1]=-20.0/pow(rho,2)*(p(1)-centers[i](1))*((1.0-r/rho)*(1.0-r/rho)*(1.0-r/rho));
+            g[i*3+2]=-20.0/pow(rho,2)*(p(2)-centers[i](2))*((1.0-r/rho)*(1.0-r/rho)*(1.0-r/rho));
+
         }
     }
+ //std::cout<<"p "<<p(0)<<" "<<p(1)<<" "<<p(2)<<std::endl;
 }
 void evalHRBF_closed(std::vector<Vector3>& pts,std::vector<Vector3>& normals, std::vector<Vector3> &centers,double rho,double eta,std::vector<double>& d){
     
@@ -694,7 +717,7 @@ void evalHRBF_closed(std::vector<Vector3>& pts,std::vector<Vector3>& normals, st
         std::vector<double> g(centers.size()*3);
     for(int j=0;j<pts.size();j++){
         Vector3 x = pts[j];
-    
+    std::cout<<"pts "<<pts[j](0)<<" "<<pts[j](1)<<" "<<pts[j](2)<<std::endl;
         Wendland_gradphi(x, centers, rho,g);
         for(int i=0;i<centers.size();i++){
             double rho2=pow(rho,2);
@@ -703,25 +726,72 @@ void evalHRBF_closed(std::vector<Vector3>& pts,std::vector<Vector3>& normals, st
             nr(0)=rho2/(20.0+eta*rho2)*normals[i](0);
             nr(1)=rho2/(20.0+eta*rho2)*normals[i](1);
             nr(2)=rho2/(20.0+eta*rho2)*normals[i](2);
-                       //     std::cout<<g[i]<<std::endl;
             double dt=nr(0)*g[i*3]+nr(1)*g[i*3+1]+nr(2)*g[i*3+2];
-    
+            //std::cout<<dt<<std::endl;
             d[j]=d[j]-dt;
           
         }
+        //std::cout<<"d="<<d[j]<<std::endl;
         g.clear();
     }
 }
+*/
+void Wendland_gradphi(Vector3 p, std::vector<Vector3>& centers,
+                      double rho, std::vector<double>& g)
+{
+    for(int i=0;i<centers.size();i++){
+        g[i*3] = 0.0;
+        g[i*3+1] = 0.0;
+        g[i*3+2] = 0.0;
+        
+        double r=sqrt(pow((p(0)-centers[i](0)),2)+pow((p(1)-centers[i](1)),2)+pow((p(2)-centers[i](2)),2));
+        
+        if (r <= rho&&(p(0)!=centers[i](0)||p(1)!=centers[i](1)||p(2)!=centers[i](2))!=0){
+            g[i*3]=-20.0/pow(rho,2)*(p(0)-centers[i](0))*pow((1.0-r/rho),3);
+            g[i*3+1]=-20.0/pow(rho,2)*(p(1)-centers[i](1))*pow((1.0-r/rho),3);
+            g[i*3+2]=-20.0/pow(rho,2)*(p(2)-centers[i](2))*pow((1.0-r/rho),3);
+        }
+    }
+}
 
+
+void evalHRBF_closed(std::vector<Vector3>& pts, std::vector<Vector3>& normals,
+                     std::vector<Vector3> &centers, double rho, double eta,
+                     std::vector<double>& d)
+{
+    for(int k=0;k<pts.size();k++){
+        d.push_back(0);
+    }
+    
+    std::vector<double> g(centers.size()*3);
+    
+    for(int j=0;j<pts.size();j++){
+        Vector3 x = pts[j];
+        
+        Wendland_gradphi(x, centers, rho,g);
+        for(int i=0;i<centers.size();i++){
+            double rho2=pow(rho,2);
+            Vector3 nr;
+            
+            nr(0)=rho2/(20.0+eta*rho2)*normals[i](0);
+            nr(1)=rho2/(20.0+eta*rho2)*normals[i](1);
+            nr(2)=rho2/(20.0+eta*rho2)*normals[i](2);
+            
+            double dt=nr(0)*g[i*3]+nr(1)*g[i*3+1]+nr(2)*g[i*3+2];
+            
+            d[j]=d[j]-dt;
+            
+        }
+    }
+}
 
 void Viewer::selectedVertDeformation(double selected_x,double selected_y,double selected_z)
  {
      typedef std::pair<Point, Vector> PointVectorPair;
      std::vector<Vec3> vertNormal, deformationPoints;
      std::vector<PointVectorPair> points;
-   //std::vector<vec3Pair> vertex;
    meshPtr->computeVertNormals(vertNormal);
-   double distance,thr=0.1,d=1.0/5.0,alpha=200.0,disp;
+   double distance,thr=0.1,d=0.1,alpha=200.0,disp;
    for(unsigned i=0;i<meshPtr->numVerts();i++){
      Vec3 p_neighbor = meshPtr->getVertPos(i);
      distance=sqrt(pow((selected_x-p_neighbor.x),2)+pow((selected_y-p_neighbor.y),2)+pow((selected_z-p_neighbor.z),2));
@@ -769,21 +839,23 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      unsigned int suby = 64;
      unsigned int subz = 64;
      createGrid(leftCorner, rightCorner, subx, suby, subz, structuredGrid);
-     HRBF_fit<double, 3, Rbf_pow3<double> > hrbf;
-     hrbf.hermite_fit(points2, normals2);
+     //HRBF_fit<double, 3, Rbf_pow3<double> > hrbf;
+    // hrbf.hermite_fit(points2, normals2);
      
      
      // Evaluate on the grid
      std::vector<double> results(structuredGrid.size());
-   /*  for (size_t i = 0; i < structuredGrid.size(); ++i) {
+     
+   /* for (size_t i = 0; i < structuredGrid.size(); ++i) {
          results[i] = hrbf.eval(structuredGrid[i]);
-         //std::cout<<results[i]<<std::endl;
      }*/
+     
+  
      double eta=4000;
      const unsigned int nb_neighbors2 = 6; // 1 ring
      double averagespacing = CGAL::compute_average_spacing(points.begin(), points.end(),CGAL::First_of_pair_property_map<PointVectorPair>(),nb_neighbors2);
     
-     evalHRBF_closed(structuredGrid,normals2,points2,averagespacing,eta,results);
+     //evalHRBF_closed(structuredGrid,normals2,points2,averagespacing*10,eta,results);*/
      float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
@@ -792,20 +864,45 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      for(int i=0;i<results.size();i++){
          resultarray[i]=results[i];
      }
-     ciso->GenerateSurface(resultarray, 0, subx-1, suby-1, subz-1, dx, dy, dz);
-     flag=1;
-     std::cout<<"flag=1"<<std::endl;
+   //  ciso->GenerateSurface(resultarray, 0, subx-1, suby-1, subz-1, dx, dy, dz);
+     
+     //poisson reconstruction
+     double sm_angle = 20.0;
+     double sm_radius = 30;
+     double sm_distance = 0.375;
+     Poisson_reconstruction_function function(points.begin(), points.end(),CGAL::First_of_pair_property_map<PointVectorPair>(),CGAL::Second_of_pair_property_map<PointVectorPair>());
+     Point inner_point = function.get_inner_point();
+     Sphere bsphere = function.bounding_sphere();
+     FT radius = std::sqrt(bsphere.squared_radius());
+     FT sm_sphere_radius = 5.0 * radius;
+     FT sm_dichotomy_error = sm_distance*averagespacing/1000.0; // Dichotomy error must be << sm_distance
+     Surface_3 surface(function,
+                       Sphere(inner_point,sm_sphere_radius*sm_sphere_radius),
+                       sm_dichotomy_error/sm_sphere_radius);
+     
+
+     
+     CGAL::Surface_mesh_default_criteria_3<STr> criteria(sm_angle,sm_radius*averagespacing,sm_distance*averagespacing);
+     STr tr;
+     C2t3 c2t3(tr);
+     CGAL::make_surface_mesh(c2t3,                                 // reconstructed mesh
+                             surface,                              // implicit surface
+                             criteria,                             // meshing criteria
+                             CGAL::Manifold_with_boundary_tag());  // require manifold mesh
+     std::ofstream out("poisson.off");
+     Polyhedron output_mesh;
+     CGAL::output_surface_facets_to_polyhedron(c2t3, output_mesh);
+     out << output_mesh;
+     
      delete[] resultarray;
      //createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
 
    //createOFFFile2("test2.off");
-     //drawPolygons();
  //std::cout<<ciso->m_nVertices<<std::endl;
      //std::cout<<(double)ciso->m_ppt3dVertices[0][0]<<std::endl;
      delete(meshPtr);
      meshPtr=new TriMesh;
-     meshPtr->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
-     
+     //meshPtr->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
      meshPtr->normalize();
      glDisable(GL_COLOR_MATERIAL);
      std::cout<<"drawed"<<std::endl;

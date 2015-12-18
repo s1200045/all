@@ -19,6 +19,7 @@
 #include <CGAL/trace.h>
 #include <CGAL/Implicit_surface_3.h>
 #include <CGAL/Surface_mesh_default_triangulation_3.h>
+#include <CGAL/IO/read_xyz_points.h>
 #include <CGAL/trace.h>
 
 #include <cstdlib>
@@ -62,16 +63,16 @@ typedef Eigen::Matrix<double,3,1> Vector3;
 bool flag=0;
 CIsoSurface <double> *ciso = new CIsoSurface <double> ();
 TriMesh Viewer::marching;
-TwBar *myBar;
+//TwBar *myBar;
 typedef CGAL::Poisson_reconstruction_function<Kernel> Poisson_reconstruction_function;
 typedef Kernel::FT FT;
 typedef CGAL::Surface_mesh_default_triangulation_3 STr;
 typedef CGAL::Surface_mesh_complex_2_in_triangulation_3<STr> C2t3;
 typedef Kernel::Sphere_3 Sphere;
 typedef CGAL::Implicit_surface_3<Kernel, Poisson_reconstruction_function> Surface_3;
-
 typedef CGAL::Polyhedron_3<Kernel> Polyhedron;
-
+typedef CGAL::Point_with_normal_3<Kernel> Point_with_normal_3;
+typedef std::vector<Point_with_normal_3> PointList;
 
 void
 Viewer::keyboard(unsigned char c, int /*x*/, int /*y*/)
@@ -790,6 +791,7 @@ void Viewer::selectedVertDeformation(double selected_x,double selected_y,double 
      typedef std::pair<Point, Vector> PointVectorPair;
      std::vector<Vec3> vertNormal, deformationPoints;
      std::vector<PointVectorPair> points;
+      PointList pwn; 
    meshPtr->computeVertNormals(vertNormal);
    double distance,thr=0.1,d=0.1,alpha=200.0,disp;
    for(unsigned i=0;i<meshPtr->numVerts();i++){
@@ -797,11 +799,10 @@ void Viewer::selectedVertDeformation(double selected_x,double selected_y,double 
      distance=sqrt(pow((selected_x-p_neighbor.x),2)+pow((selected_y-p_neighbor.y),2)+pow((selected_z-p_neighbor.z),2));
      if(distance>thr)disp=0;
       else disp=d*exp(-alpha*pow(distance,2));
-     //Vec3 tmp(p.x+disp*vertNormal[i].x,p.y+disp*vertNormal[i].y,p.z+disp*vertNormal[i].z);
-     //deformationPoints.push_back(tmp);
        Point p(p_neighbor.x+disp*vertNormal[i].x,p_neighbor.y+disp*vertNormal[i].y,p_neighbor.z+disp*vertNormal[i].z);
        Vector v(vertNormal[i].x,vertNormal[i].y,vertNormal[i].z);
-                //vertex.push_back(std::make_pair(tmp,vertNormal[i]));
+       //Point_with_normal_3 pn(p,v);
+       //pwn.push_back(pn);
        points.push_back(std::make_pair(p,v));
    }
  
@@ -850,12 +851,12 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
          results[i] = hrbf.eval(structuredGrid[i]);
      }*/
      
-  
-     double eta=4000;
+  //HRBF_closed
+     /*double eta=4000;
      const unsigned int nb_neighbors2 = 6; // 1 ring
      double averagespacing = CGAL::compute_average_spacing(points.begin(), points.end(),CGAL::First_of_pair_property_map<PointVectorPair>(),nb_neighbors2);
     
-     //evalHRBF_closed(structuredGrid,normals2,points2,averagespacing*10,eta,results);*/
+     //evalHRBF_closed(structuredGrid,normals2,points2,averagespacing*10,eta,results);
      float dx = (float)(rightCorner[0] - leftCorner[0]) / subx;
      float dy = (float)(rightCorner[1] - leftCorner[1]) / suby;
      float dz = (float)(rightCorner[2] - leftCorner[2]) / subz;
@@ -864,37 +865,68 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      for(int i=0;i<results.size();i++){
          resultarray[i]=results[i];
      }
-   //  ciso->GenerateSurface(resultarray, 0, subx-1, suby-1, subz-1, dx, dy, dz);
+   //  ciso->GenerateSurface(resultarray, 0, subx-1, suby-1, subz-1, dx, dy, dz);*/
      
      //poisson reconstruction
-     double sm_angle = 20.0;
-     double sm_radius = 30;
-     double sm_distance = 0.375;
-     Poisson_reconstruction_function function(points.begin(), points.end(),CGAL::First_of_pair_property_map<PointVectorPair>(),CGAL::Second_of_pair_property_map<PointVectorPair>());
+      std::ifstream fin("test.xyz");
+     if (!fin) {
+         std::cerr << "Error: !fin" << std::endl;
+         //return EXIT_FAILURE;
+     }
+     
+     if (!fin ||
+         !CGAL::read_xyz_points_and_normals(fin,
+                                            std::back_inserter(pwn),
+                                            CGAL::make_normal_of_point_with_normal_pmap(PointList::value_type())))
+     {
+         std::cerr << "Error: cannot read input file" << std::endl;
+         //return EXIT_FAILURE;
+     }
+     const unsigned int nb_neighbors2 = 6;
+     FT averagespacing=CGAL::compute_average_spacing(pwn.begin(),pwn.end(),nb_neighbors2);
+     FT sm_angle = 20.0;
+     FT sm_radius = 50;
+     FT sm_distance = 1.0;
+     
+     Poisson_reconstruction_function
+     function(pwn.begin(), pwn.end(),
+              CGAL::make_normal_of_point_with_normal_pmap(PointList::value_type()));
+     
+    // if ( !function.compute_implicit_function() )
+      //   return EXIT_FAILURE;
+     
      Point inner_point = function.get_inner_point();
      Sphere bsphere = function.bounding_sphere();
      FT radius = std::sqrt(bsphere.squared_radius());
+     
      FT sm_sphere_radius = 5.0 * radius;
      FT sm_dichotomy_error = sm_distance*averagespacing/1000.0; // Dichotomy error must be << sm_distance
      Surface_3 surface(function,
                        Sphere(inner_point,sm_sphere_radius*sm_sphere_radius),
                        sm_dichotomy_error/sm_sphere_radius);
      
-
      
-     CGAL::Surface_mesh_default_criteria_3<STr> criteria(sm_angle,sm_radius*averagespacing,sm_distance*averagespacing);
+     
+     CGAL::Surface_mesh_default_criteria_3<STr>
+     criteria(sm_angle, sm_radius*averagespacing, sm_distance*averagespacing);
+     
      STr tr;
      C2t3 c2t3(tr);
+     std::cout<<pwn.size()<<std::endl;
      CGAL::make_surface_mesh(c2t3,                                 // reconstructed mesh
                              surface,                              // implicit surface
                              criteria,                             // meshing criteria
                              CGAL::Manifold_with_boundary_tag());  // require manifold mesh
+     std::cout<<"aaaaaaaa"<<std::endl;
      std::ofstream out("poisson.off");
      Polyhedron output_mesh;
      CGAL::output_surface_facets_to_polyhedron(c2t3, output_mesh);
      out << output_mesh;
      
-     delete[] resultarray;
+    // return EXIT_SUCCESS;
+ 
+     
+     //delete[] resultarray;
      //createVTKFile("test.vtk", subx, suby, subz, structuredGrid, results);
 
    //createOFFFile2("test2.off");
@@ -904,6 +936,7 @@ CGAL::mst_orient_normals(points.begin(), points.end(),
      meshPtr=new TriMesh;
      //meshPtr->setData(ciso->m_ppt3dVertices,ciso->m_nVertices,ciso->m_piTriangleIndices,ciso->m_nTriangles);
      meshPtr->normalize();
+   
      glDisable(GL_COLOR_MATERIAL);
      std::cout<<"drawed"<<std::endl;
 

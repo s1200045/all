@@ -27,18 +27,25 @@ endif(USE_64BIT_ARCH)
 find_package(GLUT)
 find_package(OpenGL)
 # CGAL and its components
-find_package( CGAL QUIET COMPONENTS  )
+find_package( CGAL QUIET COMPONENTS Core )
 
-if ( NOT CGAL_FOUND )
-
-  message(STATUS "This project requires the CGAL library, and will not be compiled.")
-  return()  
-
-endif()
-
-# include helper file
+if ( CGAL_FOUND )
 include( ${CGAL_USE_FILE} )
 
+  include( CGAL_CreateSingleSourceCGALProgram )
+
+  find_package(Eigen3 3.1.0)
+  if (EIGEN3_FOUND)
+     include( ${EIGEN3_USE_FILE} )
+  else()
+     message(STATUS "NOTICE: some of the executables in this directory need Eigen 3.1 (or greater)")
+  endif()
+else()
+  
+    message(STATUS "This program requires the CGAL library, and will not be compiled.")
+ 
+ # include helper file
+endif()
 
 # Boost and its components
 find_package( Boost REQUIRED )
